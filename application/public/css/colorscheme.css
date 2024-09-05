@@ -1,0 +1,18 @@
+:root {
+  /* Backgrounds */
+  --primary-background: #24273a;
+  --secondary-background: #181926;
+
+  /* Foregrounds */
+  --primary-text: #cad3f5;
+  --secondary-text: #a5adcb;
+
+  --highlight-red: #ed8796;
+  --highlight-pink: #f5bde6;
+  --highlight-purple: #c6a0f6;
+  --highlight-orange: #f5a97f;
+  --highlight-yellow: #eed49f;
+  --highlight-green: #a6da95;
+  --highlight-teal: #8bd5ca;
+  --highlight-blue: #8aaf4;
+}

@@ -1,0 +1,41 @@
+@import url("colorscheme.css");
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: var(--secondary-background);
+  justify-content: center;
+}
+
+.content {
+  border-color: var(--highlight-pink);
+  border-size: 1px;
+  border: 1px solid var(--highlight-pink);
+  border-radius: 20px;
+  background-color: var(--primary-background);
+
+  padding: 20px;
+  margin-top: 50px;
+  position: relative;
+  min-height: 10%;
+  height: auto;
+  width: auto;
+  text-align: center;
+  align-self: flex-start;
+}
+
+h1 {
+  /* text-align: center; */
+  color: var(--primary-text);
+}
+
+p {
+  color: var(--secondary-text);
+  /* text-align: center; */
+}
