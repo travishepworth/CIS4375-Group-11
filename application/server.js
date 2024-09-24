@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/dashboard');
 });
 
 app.listen(8080);
