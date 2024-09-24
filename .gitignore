@@ -7,6 +7,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# Bs macos files
+.DS_Store
+
 # Eslint config
 eslint.config.js
 
