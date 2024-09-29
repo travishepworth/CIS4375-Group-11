@@ -1,6 +1,5 @@
-// Methods go here
+//Used for encryption
 const crypto = require('crypto');
-
 const algorithm = 'aes-256-cbc';
 
 // Function to encrypt a string
