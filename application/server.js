@@ -1,14 +1,19 @@
 // Load node modules
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 // Init express
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing urlencoded
+app.use(express.json()); // for parsing json
+
 // Include route files
 const dashboardRoute = require('./routes/dashboard.js');
 const clientsRoute = require('./routes/clients.js');
+const loginRoute = require('./routes/login.js')
 
 // Rendering static files
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -17,10 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('pages/login');
-});
+// app.get('/', (req, res) => {
+//   res.render('pages/login');
+// });
+
 app.use('/dashboard', dashboardRoute);
 app.use('/clients', clientsRoute);
+app.use('/', loginRoute);
 
 app.listen(8080);

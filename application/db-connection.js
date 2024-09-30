@@ -18,20 +18,22 @@ connection.connect((err) => {
 });
 
 // Example query (optional)
-connection.query('SELECT * FROM Country;', (err, results, fields) => {
-  console.log('Query initiated...');
-  if (err) {
-    console.error('Error executing query:', err);
-    return;
-  }
-  console.log('Query results:', results);
-});
+// connection.query('SELECT * FROM Country;', (err, results, fields) => {
+//   console.log('Query initiated...');
+//   if (err) {
+//     console.error('Error executing query:', err);
+//     return;
+//   }
+//   console.log('Query results:', results);
+// });
 
 // Close the connection (optional)
-connection.end((err) => {
-  if (err) {
-    console.error('Error closing the connection:', err);
-    return;
-  }
-  console.log('Database connection closed.');
-});
+// connection.end((err) => {
+//   if (err) {
+//     console.error('Error closing the connection:', err);
+//     return;
+//   }
+//   console.log('Database connection closed.');
+// });
+
+module.exports = connection;
