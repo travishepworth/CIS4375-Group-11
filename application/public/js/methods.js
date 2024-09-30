@@ -1,10 +1,6 @@
-// Methods go here
+//Used for encryption
 const crypto = require('crypto');
-
-// Key and IV for encryption.
 const algorithm = 'aes-256-cbc';
-const secretKey = crypto.randomBytes(32); // Replace with a secure key or store it in environment variables
-const iv = crypto.randomBytes(16); // Initialization vector
 
 // Function to encrypt a string
 function encrypt(text) {
