@@ -12,6 +12,9 @@ app.use(express.json()); // for parsing json
 
 // Include route files
 const dashboardRoute = require('./routes/dashboard.js');
+const employeesRoute = require('./routes/employees.js');
+const reportsRoute = require('./routes/reports.js');
+const suppliersRoute = require('./routes/suppliers.js');
 const clientsRoute = require('./routes/clients.js');
 const loginRoute = require('./routes/login.js')
 
@@ -27,6 +30,9 @@ app.set('view engine', 'ejs');
 // });
 
 app.use('/dashboard', dashboardRoute);
+app.use('/employees', employeesRoute);
+app.use('/reports', reportsRoute);
+app.use('/suppliers', suppliersRoute);
 app.use('/clients', clientsRoute);
 app.use('/', loginRoute);
 
