@@ -11,10 +11,15 @@ const secretKey = Buffer.from('2e914e3c68660d4e6ab1b7bce863bt13'); // KEY FOR EN
 const iv = Buffer.from('68662eh1914e63bz'); // IV FOR ENCRPYTION AND DECRYPTION, STORE IN ENV
 
 
-const textToEncrypt = "test"; //Encrypted Text
+const jsondata = {
+    name: "test"
+};
+
+
+const textToEncrypt = jsondata; //Encrypted Text
 
 const encryptedText = encrypt(textToEncrypt,secretKey,iv); // sends text to encrpytion method
-console.log('Encrypted Text:', encryptedText,);
+console.log('Encrypted data:', encryptedText,);
 
 const decryptedText = decrypt(encryptedText,secretKey,iv); // send text to decrpytion method
-console.log('Decrypted Text:', decryptedText);
+console.log('Decrypted data:', decryptedText);
