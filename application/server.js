@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const ejs = require('ejs');
+const PORT = 8080;
 
 // Init express
 const app = express();
@@ -40,4 +41,6 @@ app.use('/suppliers', suppliersRoute);
 app.use('/clients', clientsRoute);
 app.use('/', loginRoute);
 
-app.listen(8080);
+app.listen(PORT, () => {
+  console.log(`Server is running on all interfaces at port ${PORT}`)
+});
