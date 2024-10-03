@@ -21,6 +21,7 @@ document.getElementById('login').addEventListener('submit', async (event) => {
       window.location.href = response.url;
     } else {
       const result = await response.json();
+      document.getElementById('password').value = '';
       alert(result.message);
     }
 

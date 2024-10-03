@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
       return res.redirect('/dashboard');
     } else {
       // Incorrect password
-      return res.redirect('/');
+      return res.json({message: "Invalid Login"})
     }
   });
 });
