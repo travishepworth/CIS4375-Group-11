@@ -1,5 +1,6 @@
 // Load node modules
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -11,6 +12,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing urlencoded
 app.use(express.json()); // for parsing json
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 // Include route files
 const dashboardRoute = require('./routes/dashboard.js');
@@ -26,10 +32,6 @@ app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist/')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
-
-// app.get('/', (req, res) => {
-//   res.render('pages/login');
-// });
 
 app.use('/dashboard', dashboardRoute);
 app.use('/employees', employeesRoute);

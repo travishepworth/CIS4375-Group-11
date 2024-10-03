@@ -40,6 +40,7 @@ router.post('/login', (req, res) => {
 
     if (user.Password === password) {
       console.log('success')
+      req.session.isAuthenticated = true;
       // Successful login
       return res.redirect('/dashboard');
     } else {
@@ -48,5 +49,11 @@ router.post('/login', (req, res) => {
     }
   });
 });
+
+router.post('/logout', (req, res) => {
+  req.session.isAuthenticated = false;
+  console.log('logging out...')
+  return res.redirect('/');
+})
 
 module.exports = router;
