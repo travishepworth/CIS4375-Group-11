@@ -28,24 +28,26 @@ router.post('/login', (req, res) => {
   connection.query(query, [username], (err, results) => {
     if (err) {
       console.error('Database query error:', err);
-      return res.status(500).send('Internal server error');
+      return res.json({message: "Internal server error"})
     }
 
     // Check if user exists
     if (results.length === 0) {
-      return res.status(401).send('Invalid username or password');
+      return res.json({message: "Invalid username or password"})
     } 
 
+    // assign user to variable
     const user = results[0];
 
+    // compare password
     if (user.Password === password) {
       console.log('success')
-      req.session.isAuthenticated = true;
       // Successful login
+      req.session.isAuthenticated = true;
       return res.redirect('/dashboard');
     } else {
       // Incorrect password
-      return res.json({message: "Invalid Login"})
+      return res.json({message: "Invalid username or password"})
     }
   });
 });
