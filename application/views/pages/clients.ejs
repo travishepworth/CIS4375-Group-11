@@ -1,5 +1,12 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <%- include('../header.ejs'); %>
-  <%- include('../sidebar.ejs'); %>
+  <body>
+    <div class="d-flex" style="height: 100vh;">
+      <%- include('../sidebar.ejs'); %>
+      <div class="flex-grow-1 p-3">
+        <%- include('../table.ejs'); %>
+      </div>
+    </div>
+  </body>
 </html>
