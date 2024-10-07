@@ -39,9 +39,9 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
-    await fetchClientData(search)
+    await fetchClientData(search);
   });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   fetchClientData(); // load all clients when page is loaded
-})
+});

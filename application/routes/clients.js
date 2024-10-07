@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Import database connections
-const connection = require('../db-connection.js')
-const hasAuth = require('./middleware.js')
+const connection = require("../db-connection.js");
+const hasAuth = require("./middleware.js");
 
 // Define a middleware function
 const myMiddleware = (req, res, next) => {
@@ -12,35 +12,33 @@ const myMiddleware = (req, res, next) => {
 
 router.use(hasAuth);
 
-router.post('/search', (req, res) => {
+router.post("/search", (req, res) => {
   const search = req.body.search;
-  const searchTerm = `%${search}%`
-  console.log(searchTerm)
+  const searchTerm = `%${search}%`;
+  console.log(searchTerm);
 
-  const query = 'SELECT * FROM Client WHERE Client_FName LIKE ?'
+  const query = "SELECT * FROM Client WHERE Client_FName LIKE ?";
   connection.query(query, [searchTerm], (err, results) => {
     if (err) {
-      console.error('Database query error: ', err);
-      return res.json({ message: "Internal server error"})
-    };
-
-    res.json(results)
-  })
-
-
-})
-
-router.get('/', (req, res) => {
-  const query = 'SELECT * FROM Client where Client_ID = 1'
-
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error('Database query error: ', err);
+      console.error("Database query error: ", err);
       return res.json({ message: "Internal server error" });
     }
 
-    res.render('pages/clients', { currentRoute: 'clients', data: results })
-  })
+    res.json(results);
+  });
+});
+
+router.get("/", (req, res) => {
+  const query = "SELECT * FROM Client where Client_ID = 1";
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Database query error: ", err);
+      return res.json({ message: "Internal server error" });
+    }
+
+    res.render("pages/clients", { currentRoute: "clients", data: results });
+  });
 });
 
 module.exports = router;

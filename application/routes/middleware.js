@@ -1,12 +1,12 @@
-const session = require('express-session');
+const session = require("express-session");
 
 const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
-    next()
+    next();
   } else {
-    console.log('NO AUTH');
-    res.redirect('/');
+    console.log("NO AUTH");
+    res.redirect("/");
   }
-}
+};
 
 module.exports = isAuthenticated;

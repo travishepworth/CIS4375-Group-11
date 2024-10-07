@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const hasAuth = require('./middleware.js')
+const hasAuth = require("./middleware.js");
 
 // Define a middleware function
 const myMiddleware = (req, res, next) => {
@@ -10,8 +10,8 @@ const myMiddleware = (req, res, next) => {
 
 router.use(hasAuth);
 
-router.get('/', (req, res) => {
-  res.render('pages/suppliers', { currentRoute: 'suppliers' });
+router.get("/", (req, res) => {
+  res.render("pages/suppliers", { currentRoute: "suppliers" });
   // the route for localhost:3000/dashboard
 });
 
