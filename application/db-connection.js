@@ -1,10 +1,13 @@
 const mysql = require('mysql2');
+require('dotenv').config();
+
+const dbPassword = process.env.DB_PASSWORD;
 
 // Create a connection to the database
 const connection = mysql.createConnection({
   host: 'test-database.ceti305yyydb.us-east-1.rds.amazonaws.com',      // e.g., localhost or AWS RDS endpoint
   user: 'admin',           // e.g., root
-  password: 'tc4375team11',       // your database password
+  password: dbPassword,       // your database password
   database: 'technological_constructions'   // the name of your database
 });
 

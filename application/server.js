@@ -1,11 +1,20 @@
 // Load node modules
 const express = require('express');
 const session = require('express-session');
+
 const path = require('path');
 const bodyParser = require('body-parser');
+
 const cors = require('cors');
-const ejs = require('ejs');
+
+// .env secret management
+require('dotenv').config();
+const key = process.env.SESSION_KEY;
+
+
+// Set port to host website on
 const PORT = 8080;
+
 
 // Init express
 const app = express();
@@ -14,7 +23,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing urlencoded
 app.use(express.json()); // for parsing json
 app.use(session({
-  secret: 'secret-key',
+  secret: key,
   resave: false,
   saveUninitialized: true,
 }))
