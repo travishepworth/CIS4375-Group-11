@@ -4,7 +4,6 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     next();
   } else {
-    console.log("NO AUTH");
     res.redirect("/");
   }
 };

@@ -19,9 +19,6 @@ router.get("/", (req, res) => {
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  console.log(username);
-  console.log(password);
-
   const query = "SELECT * FROM Users WHERE Username = ?";
 
   // query for users
@@ -41,7 +38,6 @@ router.post("/login", (req, res) => {
 
     // compare password
     if (user.Password === password) {
-      console.log("success");
       // Successful login
       req.session.isAuthenticated = true;
       return res.redirect("/dashboard");
@@ -54,7 +50,6 @@ router.post("/login", (req, res) => {
 
 router.post("/logout", (req, res) => {
   req.session.isAuthenticated = false;
-  console.log("logging out...");
   return res.redirect("/");
 });
 

@@ -27,7 +27,6 @@ async function fetchClientData(search = "") {
       });
     }
 
-    console.log(result);
   } catch (error) {
     console.log("error: ", error);
   }
