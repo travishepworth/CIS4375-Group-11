@@ -10,7 +10,20 @@ const myMiddleware = (req, res, next) => {
   next();
 };
 
-router.use(hasAuth);
+router.use(myMiddleware);
+
+router.post("/acquisition", (req, res) => {
+  // query for current acquisition methods
+  const query = "SELECT * FROM Acquire_Type;";
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Database query error:", err);
+      return res.json({ message: "Internal server error" });
+    }
+    console.log(results);
+    res.json(results);
+  });
+});
 
 router.post("/search", (req, res) => {
   const search = req.body.search;
