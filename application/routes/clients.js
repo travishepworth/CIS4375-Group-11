@@ -15,17 +15,20 @@ router.use(hasAuth);
 router.post("/search", (req, res) => {
   const search = req.body.search;
   const searchTerm = `%${search}%`;
-  console.log(searchTerm);
 
-  const query = "SELECT * FROM Client WHERE Client_FName LIKE ?";
-  connection.query(query, [searchTerm], (err, results) => {
-    if (err) {
-      console.error("Database query error: ", err);
-      return res.json({ message: "Internal server error" });
-    }
-
-    res.json(results);
-  });
+  const query =
+    "SELECT * FROM Client WHERE Client_FName LIKE ? OR Client_LName LIKE ? OR Client_Email LIKE ? OR Client_Cell_Phone LIKE ?";
+  connection.query(
+    query,
+    [searchTerm, searchTerm, searchTerm, searchTerm],
+    (err, results) => {
+      if (err) {
+        console.error("Database query error: ", err);
+        return res.json({ message: "Internal server error" });
+      }
+      res.json(results);
+    },
+  );
 });
 
 router.get("/", (req, res) => {
