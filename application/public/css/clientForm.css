@@ -1,0 +1,61 @@
+.sidebar {
+  background-color: #f8f9fa; /* Light background for the sidebar */
+  padding: 15px;
+  height: 100vh; /* Full height for the sidebar */
+  position: fixed; /* Fixed sidebar */
+  width: 200px; /* Fixed width for the sidebar */
+  overflow-y: auto; /* Scroll if content exceeds the height */
+}
+.main-content {
+  margin-left: 220px; /* Margin to make space for the sidebar */
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+textarea {
+  resize: vertical;
+}
+.delete-btn {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.update-btn {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: darkred;
+}
+.update-btn:hover {
+  background-color: darkgreen;
+}
+.add-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+.add-button:hover {
+  background-color: #0056b3;
+}
