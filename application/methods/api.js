@@ -1,5 +1,5 @@
 // Api+Crud reusable functions
-export async function tableQuery(query, connection, req) {
+async function tableQuery(query, connection, req) {
   // define the search term from the request
   const search = req.body.search;
   const searchTerm = `%${search}%`;
@@ -18,3 +18,5 @@ export async function tableQuery(query, connection, req) {
     console.error("database query error: ", err);
   }
 };
+
+export { tableQuery };
