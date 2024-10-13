@@ -1,16 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
+// import created api/crud functions
+const api = require("../methods/api.js");
+
 // Import database connections
 const connection = require("../db-connection.js");
-const hasAuth = require("./middleware.js");
+const hasAuth = require("../methods/middleware.js");
+
 
 // Define a middleware function
 const myMiddleware = (req, res, next) => {
   next();
 };
 
-router.use(myMiddleware);
+router.use(hasAuth);
 
 router.post("/acquisition", (req, res) => {
   // query for current acquisition methods
@@ -25,23 +29,18 @@ router.post("/acquisition", (req, res) => {
   });
 });
 
-router.post("/search", (req, res) => {
-  const search = req.body.search;
-  const searchTerm = `%${search}%`;
+const query = `SELECT * FROM Client WHERE Client_FName LIKE ? 
+    OR Client_LName LIKE ? 
+    OR Client_Email LIKE ?
+    OR Client_Cell_Phone LIKE ?`;
 
-  const query =
-    "SELECT * FROM Client WHERE Client_FName LIKE ? OR Client_LName LIKE ? OR Client_Email LIKE ? OR Client_Cell_Phone LIKE ?";
-  connection.query(
-    query,
-    [searchTerm, searchTerm, searchTerm, searchTerm],
-    (err, results) => {
-      if (err) {
-        console.error("Database query error: ", err);
-        return res.json({ message: "Internal server error" });
-      }
-      res.json(results);
-    },
-  );
+router.post("/search", async (req, res) => {
+  try {
+    const results = await api.tableQuery(query, connection, req);
+    res.json(results);
+  } catch (err) {
+    console.log("error: ", err);
+  }
 });
 
 router.get("/", (req, res) => {
