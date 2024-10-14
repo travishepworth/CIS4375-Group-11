@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const hasAuth = require("./middleware.js");
+const hasAuth = require("../methods/middleware.js");
 
 // Define a middleware function
 const myMiddleware = (req, res, next) => {

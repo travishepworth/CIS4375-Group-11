@@ -1,7 +1,8 @@
 // Client side js to send post request and render table of results
-async function fetchClientData(search = "") {
+export const fetchClientData = async (search = "", columns = [], route) => {
+  // send a post request and wait for a response
   try {
-    const response = await fetch("clients/search", {
+    const response = await fetch(route, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -9,39 +10,38 @@ async function fetchClientData(search = "") {
       body: JSON.stringify({ search }),
     });
 
+    // Construct table header
+    const resultsTableHeader = document.getElementById("results-table-header");
+    resultsTableHeader.innerHTML = '';
+    const newRow = resultsTableHeader.insertRow();
+    columns.forEach((data) => {
+      data.replace("Client", "");
+      const newCell = newRow.insertCell();
+      newCell.innerHTML = data.replace(/^[^_]+_/, "").replace("_", " ");
+    });
+
+    // get data from post request
     const result = await response.json();
+
+    // Select element and clear results
     const resultsTableBody = document.getElementById("results-table-body");
     resultsTableBody.innerHTML = ``; // Clear previous results
 
     if (result.length === 0) {
-      resultsTableBody.innerHTML = `<tr><td colspan="5" class="text-center">No clients found.</td></tr>`;
+      // Set table if nothing is found
+      const emptyColumns = columns.length;
+      resultsTableBody.innerHTML = `<tr><td colspan="${emptyColumns}" class="text-center">No data found.</td></tr>`;
     } else {
+      // Construct the table based on data
       result.forEach((row) => {
         const newRow = resultsTableBody.insertRow();
-        newRow.innerHTML = `
-            <td>${row.Client_ID}</td>
-            <td>${row.Client_FName}</td>
-            <td>${row.Client_LName}</td>
-            <td>${row.Client_Email}</td>
-            <td>${row.Client_Cell_Phone}</td>`;
+        columns.forEach((data) => {
+          const newCell = newRow.insertCell();
+          newCell.innerHTML = row[data];
+        });
       });
     }
-
-    console.log(result);
   } catch (error) {
     console.log("error: ", error);
   }
-}
-
-document
-  .getElementById("search-form")
-  .addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const search = document.getElementById("search").value;
-    await fetchClientData(search);
-  });
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchClientData(); // load all clients when page is loaded
-});
+};

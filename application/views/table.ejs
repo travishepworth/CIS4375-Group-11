@@ -1,35 +1,27 @@
 <!doctype html>
 <html lang="en">
   <body>
-    <h2 class="mb-4">Client List</h2>
-    <form id="search-form" class="form-inline">
+    <form id="search-form" class="d-flex mb-4">
       <input
         id="search"
         name="search"
         for="search"
-        class="form-control mr-sm-2"
+        class="form-control me-2"
         type="text"
         placeholder="Search"
         aria-label="Search"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      <button class="btn btn-outline-success" type="submit">
         Search
       </button>
     </form>
     <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-        </tr>
+      <thead id="results-table-header">
       </thead>
       <tbody id="results-table-body"></tbody>
     </table>
 
-    <script src="js/search.js"></script>
+    <script type="module" src="js/clients.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

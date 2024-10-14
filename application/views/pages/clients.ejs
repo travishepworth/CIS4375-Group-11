@@ -4,7 +4,15 @@
   <body>
     <div class="d-flex" style="height: 100vh">
       <%- include('../sidebar.ejs'); %>
-      <div class="flex-grow-1 p-3"><%- include('../table.ejs'); %></div>
+      <div class="flex-grow-1 p-3">
+        <h2 class="mb-2">
+          Client List
+          <button type="button" class="add-button" id="openClientFormButton">
+            +
+          </button>
+        </h2>
+        <%- include('../clientForm.ejs'); %> <%- include('../table.ejs'); %>
+      </div>
     </div>
   </body>
 </html>

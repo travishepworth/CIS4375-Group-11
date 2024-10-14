@@ -1,4 +1,14 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <%- include('../header.ejs'); %> <%- include('../sidebar.ejs'); %>
+  <%- include('../header.ejs'); %>
+  <body>
+    <div class="d-flex" style="height: 100vh">
+      <%- include('../sidebar.ejs'); %>
+      <div class="flex-grow-1 p-3">
+        <h2 class="mb-4">Supplier List</h2>
+        <%- include('../table.ejs'); %>
+      <script type="module" src="js/suppliers.js"></script>
+      </div>
+    </div>
+  </body>
 </html>
