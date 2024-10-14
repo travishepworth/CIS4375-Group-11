@@ -8,7 +8,6 @@ const api = require("../methods/api.js");
 const connection = require("../db-connection.js");
 const hasAuth = require("../methods/middleware.js");
 
-
 // Define a middleware function
 const myMiddleware = (req, res, next) => {
   next();
@@ -16,25 +15,44 @@ const myMiddleware = (req, res, next) => {
 
 router.use(hasAuth);
 
-router.post("/acquisition", (req, res) => {
-  // query for current acquisition methods
-  const query = "SELECT * FROM Acquire_Type;";
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error("Database query error:", err);
-      return res.json({ message: "Internal server error" });
-    }
-    console.log(results);
-    res.json(results);
-  });
+router.post("/tableKeys", (req, res) => {
+  const querries = [
+    "SELECT * FROM Client_Type;",
+    "SELECT * FROM CMJ_Type;",
+    "SELECT * FROM Client_Status;",
+    "SELECT * FROM Acquire_Type;",
+    "SELECT * FROM Country;",
+    "SELECT * FROM State;",
+  ];
+
+  Promise.all(
+    querries.map((query) => {
+      return new Promise((resolve, reject) => {
+        connection.query(query, (err, results) => {
+          if (err) {
+            console.error("Database Query Error: ", err);
+            reject(err);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+    }),
+  )
+    .then((resultsArray) => {
+      res.json(resultsArray);
+    })
+    .catch((err) => {
+      console.error("Error executing queries: ", err);
+      res.status(500).json({ message: "Internal server error" });
+    });
 });
 
-const query = `SELECT * FROM Client WHERE Client_FName LIKE ? 
+router.post("/search", async (req, res) => {
+  const query = `SELECT * FROM Client WHERE Client_FName LIKE ? 
     OR Client_LName LIKE ? 
     OR Client_Email LIKE ?
     OR Client_Cell_Phone LIKE ?`;
-
-router.post("/search", async (req, res) => {
   try {
     const results = await api.tableQuery(query, connection, req);
     res.json(results);

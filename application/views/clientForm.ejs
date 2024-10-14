@@ -7,9 +7,6 @@
 />
 <link href="css/clientForm.css" rel="stylesheet" />
 <body>
-  <button type="button" class="add-button" id="openClientFormButton">+</button>
-  <!-- Existing clients table or list goes here -->
-
   <!-- Modal -->
   <div
     class="modal fade"
@@ -30,32 +27,21 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form id="clientForm" action="#" method="POST">
+          <form id="clientForm">
             <!-- Dropdown fields -->
             <div class="form-group">
               <label for="clientLead">Client or Lead?</label>
-              <select id="clientLead" name="clientLead">
-                <option value="client">Client</option>
-                <option value="lead">Lead</option>
-              </select>
+              <select id="clientLead" name="clientLead"></select>
             </div>
 
             <div class="form-group">
               <label for="clientType">Client Type</label>
-              <select id="clientType" name="clientType">
-                <option value="individual">Individual</option>
-                <option value="business">Business</option>
-                <option value="organization">Organization</option>
-              </select>
+              <select id="clientType" name="clientType"></select>
             </div>
 
             <div class="form-group">
               <label for="clientStatus">Client Status</label>
-              <select id="clientStatus" name="clientStatus">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="prospect">Prospect</option>
-              </select>
+              <select id="clientStatus" name="clientStatus"></select>
             </div>
 
             <div class="form-group">
@@ -77,24 +63,12 @@
 
             <div class="form-group">
               <label for="country">Country</label>
-              <select id="country" name="country">
-                <option value="usa">United States</option>
-                <option value="canada">Canada</option>
-                <option value="uk">United Kingdom</option>
-                <option value="australia">Australia</option>
-                <option value="other">Other</option>
-              </select>
+              <select id="country" name="country"></select>
             </div>
 
             <div class="form-group">
               <label for="state">State</label>
-              <select id="state" name="state">
-                <option value="TX">Texas</option>
-                <option value="CA">California</option>
-                <option value="NY">New York</option>
-                <option value="FL">Florida</option>
-                <option value="other">Other</option>
-              </select>
+              <select id="state" name="state"></select>
             </div>
 
             <!-- Text fields -->
@@ -105,22 +79,22 @@
 
             <div class="form-group">
               <label for="firstName">First Name</label>
-              <input type="text" id="firstName" name="firstName" required />
+              <input type="text" id="firstName" name="firstName" />
             </div>
 
             <div class="form-group">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" required />
+              <input type="text" id="lastName" name="lastName" />
             </div>
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="email" />
             </div>
 
             <div class="form-group">
               <label for="cellPhone">Cell Phone</label>
-              <input type="tel" id="cellPhone" name="cellPhone" required />
+              <input type="tel" id="cellPhone" name="cellPhone" />
             </div>
 
             <div class="form-group">
@@ -130,17 +104,17 @@
 
             <div class="form-group">
               <label for="address">Address</label>
-              <input type="text" id="address" name="address" required />
+              <input type="text" id="address" name="address" />
             </div>
 
             <div class="form-group">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" required />
+              <input type="text" id="city" name="city" />
             </div>
 
             <div class="form-group">
               <label for="zipCode">Zip Code</label>
-              <input type="text" id="zipCode" name="zipCode" required />
+              <input type="text" id="zipCode" name="zipCode" />
             </div>
 
             <div class="form-group">
@@ -154,7 +128,7 @@
             Delete
           </button>
           <button
-            type="submit"
+            type="button"
             id="updateButton"
             class="update-btn"
             form="clientForm"
@@ -177,7 +151,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
     <!-- JavaScript to trigger modal on page load and handle delete confirmation -->
-    <script src="js/clientForm.js"></script>
+    <script type="module" src="js/clientForm.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
