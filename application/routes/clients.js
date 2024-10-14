@@ -13,7 +13,7 @@ const myMiddleware = (req, res, next) => {
   next();
 };
 
-router.use(myMiddleware);
+router.use(hasAuth);
 
 router.post("/tableKeys", (req, res) => {
   const querries = [
