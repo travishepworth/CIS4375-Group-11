@@ -19,4 +19,18 @@ async function tableQuery(query, connection, req) {
   }
 };
 
-export { tableQuery };
+async function databaseUpdate(query, connection, req) {
+  const content = req.body.elements;
+  console.log(content)
+  try {
+    const [results] = await connection
+      .promise()
+      .query(query, content)
+    console.log(results)
+    return results;
+  } catch (err) {
+    console.error("database error: ", err);
+  }
+};
+
+export { tableQuery, databaseUpdate };
