@@ -10,6 +10,9 @@ lerna-debug.log*
 # Bs macos files
 .DS_Store
 
+# my database interaction file
+temp-query.js
+
 # Eslint config
 eslint.config.js
 
