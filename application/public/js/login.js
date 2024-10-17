@@ -26,6 +26,6 @@ document.getElementById("login").addEventListener("submit", async (event) => {
     }
   } catch (error) {
     // client side error catch
-    console.log("error: ", error);
+    console.error("error: ", error);
   }
 });

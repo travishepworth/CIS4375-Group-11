@@ -1,15 +1,52 @@
+import { modularIDs, elementIds } from "./clients.js";
+
 const mapIDtoKey = async (result, element) => {
-  console.log("called function");
   if (result.length === 0) {
   } else {
     result.forEach((type) => {
       const option = document.createElement("option");
       const keys = Object.keys(type);
-      console.log(keys);
       option.value = type[keys[0]];
       option.text = type[keys[1]];
       element.appendChild(option);
     });
+  }
+};
+
+function clearForm() {
+  elementIds.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element.tagName === "SELECT") {
+      element.selectedIndex = 0;
+    } else {
+      element.value = "";
+    }
+  });
+}
+
+function fillForm(result) {
+  // auto fill the form with data from result
+  clearForm();
+  let index = 0;
+  for (const key in result[0]) {
+    if (key === "Client_ID") {
+      continue;
+    }
+    // document.getElementById(elementIds[index]).value = result[0][key];
+    const element = document.getElementById(elementIds[index]);
+    if (element.tagName === "SELECT") {
+      const options = element.options;
+
+      for (let i = 0; i < options.length; i++) {
+        if (parseInt(options[i].value) === result[0][key]) {
+          element.selectedIndex = i;
+          break;
+        }
+      }
+    } else {
+      element.value = result[0][key];
+    }
+    index++;
   }
 }
 
@@ -49,50 +86,52 @@ export async function fetchTableKeys(modularIDs) {
   }
 }
 
-export async function postNewClient(route, elements) {
+export async function executeQuery(route, elements) {
   try {
-    const response = await fetch(route, {
+    await fetch(route, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ elements }),
     });
-
-    console.log(response);
   } catch (err) {
     console.error("error: ", err);
   }
 }
 
-//Used for encryption
-// const crypto = require("crypto");
-// const algorithm = "aes-256-cbc";
-//
-// // Function to encrypt a string
-// function encrypt(data, secretKey, iv) {
-//   {
-//     if (typeof data == "object") {
-//       data = JSON.stringify(data);
-//     }
-//   }
-//   const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-//   let encrypted = cipher.update(data, "utf8", "hex");
-//   encrypted += cipher.final("hex");
-//   return encrypted;
-// }
-//
-// // Function to decrypt a string
-// function decrypt(encryptedText, secretKey, iv) {
-//   const decipher = crypto.createDecipheriv(algorithm, secretKey, iv);
-//   let decrypted = decipher.update(encryptedText, "hex", "utf8");
-//   decrypted += decipher.final("utf8");
-//
-//   try {
-//     return JSON.parse(decrypted);
-//   } catch (error) {
-//     return decrypted;
-//   }
-// }
+// function to open the form and send a post request to the server
+// to get the data to fill the form
+export async function openExistingForm(route, id) {
+  try {
+    const response = await fetch(route, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
 
+    const result = await response.json();
+    // open the modal and fill the form with result
+    await fetchTableKeys(modularIDs);
+    let clientFormModal = new bootstrap.Modal(
+      document.getElementById("clientFormModal"),
+    );
+    clientFormModal.show();
 
+    fillForm(result);
+  } catch (error) {
+    console.error("error: ", error);
+  }
+}
+
+export async function openNewForm() {
+  await fetchTableKeys(modularIDs);
+  let clientFormModal = new bootstrap.Modal(
+    document.getElementById("clientFormModal"),
+  );
+  clearForm();
+
+  clientFormModal.show();
+}

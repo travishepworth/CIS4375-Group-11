@@ -13,7 +13,7 @@ const myMiddleware = (req, res, next) => {
   next();
 };
 
-router.use(hasAuth);
+router.use(myMiddleware);
 
 router.post("/tableKeys", (req, res) => {
   const querries = [
@@ -57,7 +57,27 @@ router.post("/search", async (req, res) => {
     const results = await api.tableQuery(query, connection, req);
     res.json(results);
   } catch (err) {
-    console.log("error: ", err);
+    console.error("error: ", err);
+  }
+});
+
+router.post("/update/delete", async (req, res) => {
+  const query = `DELETE FROM Client WHERE Client_ID = ?`;
+  try {
+    const results = await api.databaseUpdate(query, connection, req);
+    res.json(results);
+  } catch (err) {
+    console.error("error: ", err);
+  }
+});
+
+router.post("/fill", async (req, res) => {
+  const query = `SELECT * FROM Client WHERE Client_ID = ?`;
+  try {
+    const results = await api.idSearch(query, connection, req);
+    res.json(results);
+  } catch (err) {
+    console.error("error: ", err);
   }
 });
 
@@ -73,7 +93,23 @@ router.post("/update/add", (req, res) => {
     console.log(result);
     res.json({ message: "working (probably)" });
   } catch (err) {
-    console.log("error ", err);
+    console.error("error ", err);
+  }
+});
+
+router.post("/update/edit", (req, res) => {
+  const query = `UPDATE Client
+    SET Client_Type_ID = ?, CMJ_TYPE_ID = ?, Client_Status_ID = ?, 
+    Client_FName = ?, Client_LName = ?, Client_Email = ?, Client_Cell_Phone = ?, Client_Work_Phone = ?,
+    Client_Address = ?, Client_City = ?, Client_Zip = ?, Country_ID = ?, State_ID = ?, Date_Added = ?,
+    Notes = ?, Acquire_Type_ID = ?
+    WHERE Client_ID = ?`;
+  try {
+    const result = api.databaseUpdate(query, connection, req);
+    console.log(result);
+    res.json({ message: "working (probably)" });
+  } catch (err) {
+    console.error("error ", err);
   }
 });
 

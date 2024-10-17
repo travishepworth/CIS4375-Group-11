@@ -1,5 +1,7 @@
 import { fetchClientData } from "./search.js";
 
+export let searchValue = "";
+
 const columns = [
   "Emp_ID",
   "Emp_FName",
@@ -21,5 +23,6 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
+    searchValue = search;
     fetchClientData(search, columns, route);
   });

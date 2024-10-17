@@ -1,3 +1,12 @@
+import { openExistingForm } from "./methods.js";
+
+export let currentClientID = -1;
+
+export function refreshClientID() {
+  currentClientID = -1;
+  return;
+}
+
 // Client side js to send post request and render table of results
 export const fetchClientData = async (search = "", columns = [], route) => {
   // send a post request and wait for a response
@@ -35,6 +44,11 @@ export const fetchClientData = async (search = "", columns = [], route) => {
       // Construct the table based on data
       result.forEach((row) => {
         const newRow = resultsTableBody.insertRow();
+        // make each row clickable
+        newRow.addEventListener("click", function () {
+          currentClientID = row.Client_ID;
+          openExistingForm("clients/fill", row.Client_ID);
+        });
         columns.forEach((data) => {
           const newCell = newRow.insertCell();
           newCell.innerHTML = row[data];
@@ -42,6 +56,6 @@ export const fetchClientData = async (search = "", columns = [], route) => {
       });
     }
   } catch (error) {
-    console.log("error: ", error);
+    console.error("error: ", error);
   }
 };

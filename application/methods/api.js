@@ -19,18 +19,29 @@ async function tableQuery(query, connection, req) {
   }
 };
 
+async function idSearch(query, connection, req) {
+  const search = req.body.id;
+
+  try {
+    const [results] = await connection
+      .promise()
+      .query(query, search);
+    return results;
+  } catch (err) {
+    console.error("database query error: ", err);
+  }
+};
+
 async function databaseUpdate(query, connection, req) {
   const content = req.body.elements;
-  console.log(content)
   try {
     const [results] = await connection
       .promise()
       .query(query, content)
-    console.log(results)
     return results;
   } catch (err) {
     console.error("database error: ", err);
   }
 };
 
-export { tableQuery, databaseUpdate };
+export { tableQuery, databaseUpdate, idSearch };
