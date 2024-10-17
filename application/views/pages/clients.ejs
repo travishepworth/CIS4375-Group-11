@@ -2,16 +2,22 @@
 <html lang="en" data-bs-theme="auto">
   <%- include('../header.ejs'); %>
   <body>
-    <div class="d-flex" style="height: 100vh">
-      <%- include('../sidebar.ejs'); %>
-      <div class="flex-grow-1 p-3">
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <div class="sticky-sidebar" style="height: 100vh; width: auto;">
+        <%- include('../sidebar.ejs'); %>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="flex-grow-1 p-3" style="margin-left: auto;">
         <h2 class="mb-2">
           Client List
           <button type="button" class="add-button" id="openClientFormButton">
             +
           </button>
         </h2>
-        <%- include('../clientForm.ejs'); %> <%- include('../table.ejs'); %>
+        <%- include('../clientForm.ejs'); %>
+        <%- include('../table.ejs'); %>
       </div>
     </div>
   </body>

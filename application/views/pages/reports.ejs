@@ -1,4 +1,11 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <%- include('../header.ejs'); %> <%- include('../sidebar.ejs'); %>
+  <%- include('../header.ejs'); %> 
+  <body>
+    <div class="d-flex">
+      <div class="sticky-sidebar" style="height: 100vh; width: auto;">
+        <%- include('../sidebar.ejs'); %>
+      </div>
+    </div>
+  </body>
 </html>
