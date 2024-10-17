@@ -29,6 +29,6 @@ document
         alert(result.message);
       }
     } catch (error) {
-      console.log("error: ", error);
+      console.error("error: ", error);
     }
   });

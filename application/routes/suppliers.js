@@ -26,7 +26,7 @@ router.post("/search", async (req, res) => {
     const results = await api.tableQuery(query, connection, req);
     res.json(results);
   } catch (err) {
-    console.log("error: ", err);
+    console.error("error: ", err);
   }
 });
 
