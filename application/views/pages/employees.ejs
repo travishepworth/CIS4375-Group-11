@@ -2,8 +2,10 @@
 <html lang="en" data-bs-theme="auto">
   <%- include('../header.ejs'); %>
   <body>
-    <div class="d-flex" style="height: 100vh">
-      <%- include('../sidebar.ejs'); %>
+    <div class="d-flex">
+      <div class="sticky-sidebar" style="height: 100vh; width: auto;">
+        <%- include('../sidebar.ejs'); %>
+      </div>
       <div class="flex-grow-1 p-3">
         <h2 class="mb-4">Employee List</h2>
         <%- include('../table.ejs'); %>

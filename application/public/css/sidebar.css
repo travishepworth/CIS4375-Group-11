@@ -63,3 +63,15 @@ main {
 .scrollarea {
   overflow-y: auto;
 }
+
+.sticky-sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: #343a40;
+  padding: 10px;
+  width: auto;
+  z-index: 1000;
+  overflow-y: auto;
+}
