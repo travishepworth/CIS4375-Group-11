@@ -42,7 +42,12 @@ export const fetchClientData = async (search = "", columns = [], route) => {
       resultsTableBody.innerHTML = `<tr><td colspan="${emptyColumns}" class="text-center">No data found.</td></tr>`;
     } else {
       // Construct the table based on data
+      let totalRows = 0;
       result.forEach((row) => {
+        // Limit the number of rows to 20
+        if (totalRows > 19) {
+          return;
+        }
         const newRow = resultsTableBody.insertRow();
         // make each row clickable
         newRow.addEventListener("click", function () {
@@ -53,6 +58,7 @@ export const fetchClientData = async (search = "", columns = [], route) => {
           const newCell = newRow.insertCell();
           newCell.innerHTML = row[data];
         });
+        totalRows++;
       });
     }
   } catch (error) {
