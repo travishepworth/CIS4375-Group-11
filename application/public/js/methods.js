@@ -1,5 +1,9 @@
 import { modularIDs, elementIds } from "./clients.js";
 
+const clientFormModal = new bootstrap.Modal(
+  document.getElementById("clientFormModal"),
+);
+
 const mapIDtoKey = async (result, element) => {
   if (result.length === 0) {
   } else {
@@ -115,9 +119,6 @@ export async function openExistingForm(route, id) {
     const result = await response.json();
     // open the modal and fill the form with result
     await fetchTableKeys(modularIDs);
-    let clientFormModal = new bootstrap.Modal(
-      document.getElementById("clientFormModal"),
-    );
     clientFormModal.show();
 
     fillForm(result);
@@ -126,11 +127,12 @@ export async function openExistingForm(route, id) {
   }
 }
 
+export function closeForm() {
+  clientFormModal.hide();
+}
+
 export async function openNewForm() {
   await fetchTableKeys(modularIDs);
-  let clientFormModal = new bootstrap.Modal(
-    document.getElementById("clientFormModal"),
-  );
   clearForm();
 
   clientFormModal.show();
