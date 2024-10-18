@@ -6,4 +6,13 @@
       <div class="sticky-sidebar" style="height: 100vh; width: auto;">
         <%- include('../sidebar.ejs'); %>
       </div>
+
+      <div class="flex-grow-1 p-3" style="margin-left: auto;">
+        <h2 class="mb-2">
+          Events
+          <button type="button" class="add-button" id="openJobFormButton">
+            +
+          </button>
+        </h2>
+        <%- include('../jobForm.ejs'); %>
 </html>
