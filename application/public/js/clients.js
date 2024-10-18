@@ -80,6 +80,7 @@ document
       await executeQuery("clients/update/edit", elements);
     }
     fetchClientData(searchValue, columns, route);
+    closeForm();
   });
 
 document
@@ -91,5 +92,6 @@ document
       await executeQuery("clients/update/delete", elements);
       // alert("Client deleted.");
       await fetchClientData(searchValue, columns, route);
+      closeForm();
     }
   });
