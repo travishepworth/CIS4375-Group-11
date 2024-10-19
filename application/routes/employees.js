@@ -14,12 +14,11 @@ const myMiddleware = (req, res, next) => {
 
 router.use(hasAuth);
 
-const query = `SELECT * FROM Employee WHERE Emp_FName LIKE ? 
+router.post("/search", async (req, res) => {
+  const query = `SELECT * FROM Employee WHERE Emp_FName LIKE ? 
     OR Emp_LName LIKE ? 
     OR Emp_Email LIKE ?
     OR Emp_Cell_Phone LIKE ?`;
-
-router.post("/search", async (req, res) => {
   try {
     const results = await api.tableQuery(query, connection, req);
     res.json(results);
@@ -27,7 +26,6 @@ router.post("/search", async (req, res) => {
     console.error("error: ", err);
   }
 });
-
 
 router.get("/", (req, res) => {
   res.render("pages/employees", { currentRoute: "employees" });

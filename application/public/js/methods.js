@@ -1,4 +1,4 @@
-import { modularIDs, elementIds } from "./clients.js";
+import { modularIDs, elementIds } from "./variables.js";
 
 const clientFormModal = new bootstrap.Modal(
   document.getElementById("clientFormModal"),

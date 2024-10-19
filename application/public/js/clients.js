@@ -1,37 +1,10 @@
 import { executeQuery, openNewForm, closeForm } from "./methods.js";
 import { currentClientID, fetchClientData, refreshClientID } from "./search.js";
+import { elementIds } from "./variables.js";
 
 export let searchValue = "";
 
-export const elementIds = [
-  "clientLead",
-  "clientType",
-  "clientStatus",
-  "firstName",
-  "lastName",
-  "email",
-  "cellPhone",
-  "workPhone",
-  "address",
-  "city",
-  "zipCode",
-  "country",
-  "state",
-  "dateAcquired",
-  "notes",
-  "acquisitionMethod",
-];
-
-export const modularIDs = [
-  "clientLead",
-  "clientType",
-  "clientStatus",
-  "acquisitionMethod",
-  "country",
-  "state",
-];
-
-export const columns = [
+const columns = [
   "Client_ID",
   "Client_FName",
   "Client_LName",
@@ -39,7 +12,7 @@ export const columns = [
   "Client_Cell_Phone",
 ];
 
-export const route = "/clients/search";
+const route = "/clients/search";
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchClientData("", columns, route); // load all clients when page is loaded
