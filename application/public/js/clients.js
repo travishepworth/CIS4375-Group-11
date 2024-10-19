@@ -1,8 +1,4 @@
-import { executeQuery, openNewForm, closeForm } from "./methods.js";
-import { currentClientID, fetchClientData, refreshClientID } from "./search.js";
-import { elementIds } from "./variables.js";
-
-export let searchValue = "";
+import { TableFormWrapper } from "./tableFormWrapper.js";
 
 const columns = [
   "Client_ID",
@@ -12,10 +8,40 @@ const columns = [
   "Client_Cell_Phone",
 ];
 
-const route = "/clients/search";
+const elementIds = [
+  "clientLead",
+  "clientType",
+  "clientStatus",
+  "firstName",
+  "lastName",
+  "email",
+  "cellPhone",
+  "workPhone",
+  "address",
+  "city",
+  "zipCode",
+  "country",
+  "state",
+  "dateAcquired",
+  "notes",
+  "acquisitionMethod",
+];
+
+const modularIDs = [
+  "clientLead",
+  "clientType",
+  "clientStatus",
+  "acquisitionMethod",
+  "country",
+  "state",
+];
+
+const route = "clients";
+
+const Page = new TableFormWrapper(columns, route, elementIds, modularIDs);
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchClientData("", columns, route); // load all clients when page is loaded
+  Page.constructTable();
 });
 
 document
@@ -24,47 +50,30 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
-    searchValue = search;
-    fetchClientData(search, columns, route);
+    Page.search(search);
   });
 
 document
   .getElementById("btn-close")
   .addEventListener("click", async function () {
-    closeForm();
+    Page.closeForm();
   });
 
 // Handle the "+" button click event to open the modal
 document
   .getElementById("openClientFormButton")
   .addEventListener("click", function () {
-    refreshClientID();
-    openNewForm();
+    Page.openForm();
   });
 
 document
   .getElementById("updateButton")
   .addEventListener("click", async function () {
-    const elements = elementIds.map((id) => document.getElementById(id).value);
-    if (currentClientID === -1) {
-      await executeQuery("clients/update/add", elements);
-    } else {
-      elements.push(currentClientID);
-      await executeQuery("clients/update/edit", elements);
-    }
-    fetchClientData(searchValue, columns, route);
-    closeForm();
+    Page.updateRow();
   });
 
 document
   .getElementById("deleteButton")
   .addEventListener("click", async function () {
-    if (confirm("Are you sure you want to delete this client?")) {
-      // Perform delete action here
-      const elements = [currentClientID];
-      await executeQuery("clients/update/delete", elements);
-      // alert("Client deleted.");
-      await fetchClientData(searchValue, columns, route);
-      closeForm();
-    }
+    Page.deleteRow();
   });

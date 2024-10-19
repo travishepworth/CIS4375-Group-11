@@ -1,4 +1,4 @@
-import { fetchClientData } from "./search.js";
+import { TableFormWrapper } from "./tableFormWrapper.js";
 
 const columns = [
   "Supplier_ID",
@@ -9,10 +9,12 @@ const columns = [
   "Supplier_Cell_Phone",
 ];
 
-const route = "/suppliers/search";
+const route = "suppliers";
+
+const Page = new TableFormWrapper(columns, route);
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchClientData("", columns, route); // load all clients when page is loaded
+  Page.constructTable();
 });
 
 document
@@ -21,5 +23,5 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
-    fetchClientData(search, columns, route);
+    Page.search(search);
   });

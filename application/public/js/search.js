@@ -8,7 +8,7 @@ export function refreshClientID() {
 }
 
 // Client side js to send post request and render table of results
-export const fetchClientData = async (search = "", columns = [], route) => {
+export const fetchClientData = async (search = "", columns = [], route, fillRoute, modularIDs) => {
   // send a post request and wait for a response
   try {
     const response = await fetch(route, {
@@ -52,7 +52,7 @@ export const fetchClientData = async (search = "", columns = [], route) => {
         // make each row clickable
         newRow.addEventListener("click", function () {
           currentClientID = row.Client_ID;
-          openExistingForm("clients/fill", row.Client_ID);
+          openExistingForm(fillRoute, row.Client_ID, modularIDs);
         });
         columns.forEach((data) => {
           const newCell = newRow.insertCell();
