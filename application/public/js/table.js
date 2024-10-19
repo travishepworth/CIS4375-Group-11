@@ -53,9 +53,7 @@ export class Table {
           const newRow = resultsTableBody.insertRow();
           // make each row clickable
           newRow.addEventListener("click", () => {
-            // currentClientID = row.Client_ID;
-            this.form.updateID(row.Client_ID);
-            // CHANGE THIS ---------------->
+            this.form.updateID(row[Object.keys(row)[0]]);
             this.form.openExistingForm();
           });
           this.columns.forEach((data) => {

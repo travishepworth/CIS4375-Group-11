@@ -8,7 +8,7 @@ export class Form {
     this.id = -1;
 
     this.formModal = new bootstrap.Modal(
-      document.getElementById("clientFormModal"),
+      document.getElementById("formModal"),
     );
   }
 
@@ -38,7 +38,6 @@ export class Form {
       });
 
       const result = await response.json();
-      console.log(result);
       // open the modal and fill the form with result
       await this.#fetchTableKeys(this.modularIDs);
       this.formModal.show();
@@ -103,11 +102,15 @@ export class Form {
     // auto fill the form with data from result
     this.#clearForm();
     let index = 0;
+    let jobIdExists = false;
+    let clientIdExists = false;
     for (const key in result[0]) {
-      if (key === "Client_ID") {
+      if (key === "Job_ID") {
+        jobIdExists = true;
+        continue;
+      } else if (key === "Client_ID" && !jobIdExists) {
         continue;
       }
-      // document.getElementById(elementIds[index]).value = result[0][key];
       const element = document.getElementById(this.elementIDs[index]);
       if (element.tagName === "SELECT") {
         const options = element.options;
@@ -143,7 +146,11 @@ export class Form {
         const option = document.createElement("option");
         const keys = Object.keys(type);
         option.value = type[keys[0]];
+        if (element.id === "Client_ID") {
+          option.text = `${type[keys[4]]} ${type[keys[5]]}`;
+        } else {
         option.text = type[keys[1]];
+        }
         element.appendChild(option);
       });
     }
@@ -174,8 +181,15 @@ export class Form {
         const documentID = document.getElementById(id);
         documentID.innerHTML = "";
 
+        // TODO -> add logic to determine if the form is a job form
+        // and if so, fill a box with client names
+        //
+        // if (id === "Client_ID") {
+          // this.#mapClientIDtoKey(result[resultsIndex], documentID);
+        // } else {
         // call map function to fill the boxes and increment results index
         this.#mapIDtoKey(result[resultsIndex], documentID);
+        // }
         resultsIndex++;
       });
     } catch (error) {

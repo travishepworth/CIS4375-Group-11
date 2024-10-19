@@ -81,7 +81,7 @@ router.post("/fill", async (req, res) => {
   }
 });
 
-router.post("/update/add", (req, res) => {
+router.post("/update/add", async (req, res) => {
   const query = `INSERT INTO Client
     (Client_Type_ID, CMJ_TYPE_ID, Client_Status_ID, 
     Client_FName, Client_LName, Client_Email, Client_Cell_Phone, Client_Work_Phone,
@@ -89,8 +89,7 @@ router.post("/update/add", (req, res) => {
     Notes, Acquire_Type_ID)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
   try {
-    const result = api.databaseUpdate(query, connection, req);
-    console.log(result);
+    const result = await api.databaseUpdate(query, connection, req);
     res.json({ message: "working (probably)" });
   } catch (err) {
     console.error("error ", err);
@@ -106,7 +105,6 @@ router.post("/update/edit", (req, res) => {
     WHERE Client_ID = ?`;
   try {
     const result = api.databaseUpdate(query, connection, req);
-    console.log(result);
     res.json({ message: "working (probably)" });
   } catch (err) {
     console.error("error ", err);
