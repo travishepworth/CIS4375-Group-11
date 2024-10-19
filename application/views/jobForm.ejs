@@ -37,54 +37,197 @@
                 <option value="meeting">Meeting</option>
               </select>
             </div>
-            
-            <!--Job Form-->
+            <!-- Job Form -->
             <div id="jobForm" style="display: none; margin-top: 20px;">
               <h3>Job Form</h3>
+
               <div class="form-group">
                 <label for="jobType">Job Type</label>
-                <select id="jobType" name="jobType" class="form-select">
-                  <option value="Residential">Residential</option>
-                  <option value="Commercial">Commercial</option>
+                <select id="cmjtype" name="cmjtype" class="form-select">
                 </select>
               </div>
-              <!-- Additional fields can go here -->
+
+              <div class="form-group">
+                <label for="jobstatus">Job Status</label>
+                <select id="jobstatus" name="jobstatus" class="form-control" ></select>
+              </div>
+
+              <div class="form-group">
+                <label for="jobDescription">Job Description</label>
+                <select id="jobDescription" name="jobDescription" class="form-control" ></select>
+              </div>
+
+              <div class="form-group">
+                <label for="jobDate">Job Date</label>
+                <input type="date" id="jobDate" name="jobDate" class="form-control"/>
+              </div>
+
+              <div class="form-group">
+                <label for="jobTime">Job Time</label>
+                <input type="time" id="jobTime" name="jobTime" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobcountry">Country</label>
+                <select id="jobcountry" name="jobcountry" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="jobState">State</label>
+                <select id="jobState" name="jobState" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="jobAddress">Job Address</label>
+                <input type="text" id="jobAddress" name="jobAddress" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobCity">Job City</label>
+                <input type="text" id="jobCity" name="jobCity" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobZip">Job Zip</label>
+                <input type="text" id="jobZip" name="jobZip" class="form-control" />
+              </div>
+              
+              <div class="form-group">
+                <label for="jobprevDeposit">Previous Deposit</label>
+                <input type="number" id="jobprevDeposit" name="jobprevDeposit" class="form-control" />
+              </div>
+              
+              <div class="form-group">
+                <label for="jobcharge">Charge</label>
+                <input type="number" id="jobcharge" name="jobcharge" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobCost">Job Cost</label>
+                <input type="number" id="jobCost" name="jobCost" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobCostNotes">Job Cost Notes</label>
+                <textarea id="jobCostNotes" name="jobCostNotes" class="form-control"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="jobProfit">Job Profit</label>
+                <input type="number" id="jobProfit" name="jobProfit" class="form-control" readonly/>
+              </div>
+
+              <div class="form-group">
+                <label for="jobNotes">Job Notes</label>
+                <textarea id="jobNotes" name="jobNotes" class="form-control"></textarea>
+              </div>
             </div>
+
+            
+
+
 
             <!--Meeting Form-->
             <div id="meetingForm" style="display: none; margin-top: 20px;">
               <h3>Meeting Form</h3>
               <div class="form-group">
-                <label for="meetingType">Meeting Type</label>
-                <select id="meetingType" name="meetingType" class="form-select">
-                  <option value="In-Person">In-Person</option>
-                  <option value="Virtual">Virtual</option>
-                </select>
+                <label for="meetingcmjType">Meeting Type</label>
+                <select id="meetingcmjType" name="meetingcmjType" class="form-select"></select>
               </div>
-              <!-- Additional fields can go here -->
+
+              <div class="form-group">
+                <label for="meetingstatus">Meeting Status</label>
+                <select id="meetingstatus" name="meetingstatus" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="meetingdate">Meeting Date</label>
+                <input type="date" id="meetingdate" name="meetingdate" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingtime">Meeting Time</label>
+                <input type="time" id="meetingtime" name="meetingtime" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingcountry">Country</label>
+                <select id="meetingcountry" name="meetingcountry" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="meetingState">State</label>
+                <select id="meetingState" name="meetingState" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="meetingAddress">Meeting Address</label>
+                <input type="text" id="meetingAddress" name="meetingAddress" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingCity">Meeting City</label>
+                <input type="text" id="meetingCity" name="meetingCity" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingZip">Job Zip</label>
+                <input type="text" id="meetingZip" name="meetingZip" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingZip">Job Zip</label>
+                <input type="text" id="meetingZip" name="meetingZip" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingDeposit">Deposit Collected</label>
+                <input type="number" id="meetingDeposit" name="meetingDeposit" class="form-control" />
+              </div>
+              
+              <div class="form-group">
+                <label for="meetingQuote">Quote</label>
+                <input type="number" id="meetingQuote" name="meetingQuote" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="jobCost">Job Cost</label>
+                <input type="number" id="jobCost" name="jobCost" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="meetingCostNotes">Meeting Cost Notes</label>
+                <textarea id="meetingCostNotes" name="meetingCostNotes" class="form-control"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="meetingProfit">Estimated Profit</label>
+                <input type="number" id="meetingProfit" name="meetingProfit" class="form-control" readonly/>
+              </div>
+
+              <div class="form-group">
+                <label for="meetingNotes">Meeting Notes</label>
+                <textarea id="meetingNotes" name="meetingNotes" class="form-control"></textarea>
+              </div>
+            </div>
+            
             </div>
            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="deleteButton" class="delete-btn">
-            Delete
-          </button>
-          <button
-            type="button"
-            id="updateButton"
-            class="update-btn"
-            form="jobForm"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
+        
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="updateButton"
+              class="update-btn"
+              form="jobForm"
+            >
+              Update
+            </button>
+            <button type="button" id="deleteButton" class="delete-btn">
+              Delete
+            </button>
+          </div>
+      </div>
       </div>
     </div>
 
