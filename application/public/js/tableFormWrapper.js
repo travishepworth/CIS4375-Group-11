@@ -51,6 +51,8 @@ export class TableFormWrapper {
 
   // PRIVATE METHODS
   #refreshTable() {
-    this.table.constructTable(this.searchTerm);
+    if (this.table) {
+      this.table.constructTable(this.searchTerm);
+    }
   }
 }

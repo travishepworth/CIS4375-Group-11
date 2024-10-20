@@ -7,17 +7,15 @@ export class Form {
     this.route = route;
     this.id = -1;
 
-    this.formModal = new bootstrap.Modal(
-      document.getElementById("formModal"),
-    );
+    this.formModal = new bootstrap.Modal(document.getElementById("formModal"));
   }
 
   // PUBLIC METHODS
 
   async openNewForm() {
     this.resetID();
-    await this.#fetchTableKeys();
     this.#clearForm();
+    await this.#fetchTableKeys();
 
     this.formModal.show();
   }
@@ -39,7 +37,7 @@ export class Form {
 
       const result = await response.json();
       // open the modal and fill the form with result
-      await this.#fetchTableKeys(this.modularIDs);
+      await this.#fetchTableKeys();
       this.formModal.show();
 
       this.#fillForm(result);
@@ -102,13 +100,12 @@ export class Form {
     // auto fill the form with data from result
     this.#clearForm();
     let index = 0;
-    let jobIdExists = false;
-    let clientIdExists = false;
+    let jobMeetIdExists = false;
     for (const key in result[0]) {
-      if (key === "Job_ID") {
-        jobIdExists = true;
+      if (key === "Job_ID" || key === "Meet_ID") {
+        jobMeetIdExists = true;
         continue;
-      } else if (key === "Client_ID" && !jobIdExists) {
+      } else if (key === "Client_ID" && !jobMeetIdExists) {
         continue;
       }
       const element = document.getElementById(this.elementIDs[index]);
@@ -146,10 +143,10 @@ export class Form {
         const option = document.createElement("option");
         const keys = Object.keys(type);
         option.value = type[keys[0]];
-        if (element.id === "Client_ID") {
+        if (element.id.includes("Client_ID")) {
           option.text = `${type[keys[4]]} ${type[keys[5]]}`;
         } else {
-        option.text = type[keys[1]];
+          option.text = type[keys[1]];
         }
         element.appendChild(option);
       });
@@ -181,15 +178,8 @@ export class Form {
         const documentID = document.getElementById(id);
         documentID.innerHTML = "";
 
-        // TODO -> add logic to determine if the form is a job form
-        // and if so, fill a box with client names
-        //
-        // if (id === "Client_ID") {
-          // this.#mapClientIDtoKey(result[resultsIndex], documentID);
-        // } else {
         // call map function to fill the boxes and increment results index
         this.#mapIDtoKey(result[resultsIndex], documentID);
-        // }
         resultsIndex++;
       });
     } catch (error) {
