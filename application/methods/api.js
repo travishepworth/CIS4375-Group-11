@@ -21,6 +21,8 @@ async function tableQuery(query, connection, req) {
 
 async function idSearch(query, connection, req) {
   const search = req.body.id;
+  console.log("search: ", search);
+  console.log("query: ", query);
 
   try {
     const [results] = await connection

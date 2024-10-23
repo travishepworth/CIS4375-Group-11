@@ -1,13 +1,16 @@
 // Form delcaration module
 
 export class Form {
-  constructor(elementIDs, modularIDs, route) {
+  constructor(elementIDs, modularIDs, route, formName = "formModal") {
     this.elementIDs = elementIDs;
     this.modularIDs = modularIDs;
     this.route = route;
     this.id = -1;
+    this.formName = formName;
 
-    this.formModal = new bootstrap.Modal(document.getElementById("formModal"));
+    this.formModal = new bootstrap.Modal(
+      document.getElementById(`${formName}`),
+    );
   }
 
   // PUBLIC METHODS
@@ -61,11 +64,13 @@ export class Form {
   }
 
   async deleteRow() {
-    if (confirm("Are you sure you want to delete this client?")) {
-      // Perform delete action here
-      const elements = [this.id];
-      await this.#executeQuery("delete", elements);
-      this.closeForm();
+    if (document.getElementById(this.formName).classList.contains("show")) {
+      if (confirm("Are you sure you want to delete this client?")) {
+        // Perform delete action here
+        const elements = [this.id];
+        await this.#executeQuery("delete", elements);
+        this.closeForm();
+      }
     }
   }
 
@@ -81,6 +86,8 @@ export class Form {
 
   async #executeQuery(type, elements) {
     try {
+      console.log(`${this.route}/update/${type}`)
+
       const response = await fetch(`${this.route}/update/${type}`, {
         method: "POST",
         headers: {
@@ -90,6 +97,7 @@ export class Form {
       });
 
       const result = await response.json();
+      console.log(result);
       return result;
     } catch (error) {
       console.error("error: ", error);

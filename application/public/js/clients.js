@@ -36,9 +36,9 @@ const modularIDs = [
   "state",
 ];
 
-const route = "clients";
+const route = "clients/client";
 
-const Page = new TableFormWrapper(columns, route, elementIds, modularIDs);
+const Page = new TableFormWrapper(columns, route, elementIds, modularIDs, "clientFormModal");
 
 document.addEventListener("DOMContentLoaded", () => {
   Page.constructTable();

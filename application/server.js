@@ -35,6 +35,7 @@ const reportsRoute = require("./routes/reports.js");
 const suppliersRoute = require("./routes/suppliers.js");
 const clientsRoute = require("./routes/clients.js");
 const loginRoute = require("./routes/login.js");
+const httpRequestsRoute = require("./routes/httpRequests.js");
 
 // Rendering static files
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -48,6 +49,7 @@ app.use("/employees", employeesRoute);
 app.use("/reports", reportsRoute);
 app.use("/suppliers", suppliersRoute);
 app.use("/clients", clientsRoute);
+app.use("/", httpRequestsRoute);
 app.use("/", loginRoute);
 
 app.listen(PORT, () => {

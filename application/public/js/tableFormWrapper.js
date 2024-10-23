@@ -2,15 +2,16 @@ import { Form } from "./form.js";
 import { Table } from "./table.js";
 
 export class TableFormWrapper {
-  constructor(columns, route, elementIDs, modularIDs) {
+  constructor(columns, route, elementIDs, modularIDs, formName = "formModal") {
     this.columns = columns;
     this.route = route;
     this.elementIDs = elementIDs;
     this.modularIDs = modularIDs;
+    this.formName = formName;
 
     this.searchTerm = "";
 
-    this.form = new Form(this.elementIDs, this.modularIDs, this.route);
+    this.form = new Form(this.elementIDs, this.modularIDs, this.route, this.formName);
   }
 
   // PUBLIC METHODS

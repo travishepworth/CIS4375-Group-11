@@ -21,15 +21,6 @@ const query = `SELECT * FROM Supplier WHERE Supplier_FName LIKE ?
     OR Supplier_Email LIKE ?
     OR Supplier_Cell_Phone LIKE ?`;
 
-router.post("/search", async (req, res) => {
-  try {
-    const results = await api.tableQuery(query, connection, req);
-    res.json(results);
-  } catch (err) {
-    console.error("error: ", err);
-  }
-});
-
 router.get("/", (req, res) => {
   res.render("pages/suppliers", { currentRoute: "suppliers" });
   // the route for localhost:3000/dashboard

@@ -9,7 +9,7 @@ const columns = [
   "Supplier_Cell_Phone",
 ];
 
-const route = "suppliers";
+const route = "suppliers/supplier";
 
 const Page = new TableFormWrapper(columns, route);
 

@@ -83,12 +83,14 @@ const MeetingPage = new TableFormWrapper(
   meetingRoute,
   meetingElementIDs,
   meetingModularIDs,
+  "meetingFormModal",
 );
 const JobPage = new TableFormWrapper(
   jobColumns,
   jobRoute,
   jobElementIDs,
   jobModularIDs,
+  "jobFormModal",
 );
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,65 +107,34 @@ document
   });
 
 document
-  .getElementById("btn-close")
-  .addEventListener("click", async function () {
+  .getElementById("openJobFormButton")
+  .addEventListener("click", function () {
+    JobPage.openForm();
+  });
+
+document
+  .getElementById("openMeetingFormButton")
+  .addEventListener("click", function () {
+    MeetingPage.openForm();
+  });
+
+document.querySelectorAll(".btn-close").forEach((button) => {
+  button.addEventListener("click", async function () {
     JobPage.closeForm();
     MeetingPage.closeForm();
   });
-
-document
-  .getElementById("openJobFormButton")
-  .addEventListener("click", function () {
-    document.getElementById("jobMeeting").value = "meeting";
-    MeetingPage.openForm();
-    document.getElementById("jobMeeting").addEventListener("change", function () {
-      if (this.value === "job") {
-        JobPage.openForm();
-        MeetingPage.closeForm();
-      } else if (this.value === "meeting") {
-        MeetingPage.openForm();
-        JobPage.closeForm();
-      } });
-  });
-
-document
-  .getElementById("updateButton")
-  .addEventListener("click", async function () {
-    const jobMeetingSelect = document.getElementById("jobMeeting");
-    if (jobMeetingSelect.value === "job") {
-      JobPage.updateRow();
-    } else if (jobMeetingSelect.value === "meeting") {
-      MeetingPage.updateRow();
-    }
-  });
-
-document
-  .getElementById("deleteButton")
-  .addEventListener("click", async function () {
-    const jobMeetingSelect = document.getElementById("jobMeeting");
-    if (jobMeetingSelect.value === "job") {
-      console.log("Job delete");
-      JobPage.deleteRow();
-    } else if (jobMeetingSelect.value === "meeting") {
-      console.log("Meeting delete");
-      MeetingPage.deleteRow();
-    }
-  });
-
-document.getElementById("jobMeeting").addEventListener("change", function () {
-  let selectedForm = this.value;
-
-  // Hide both forms initially
-  document.getElementById("jobForm").style.display = "none";
-  document.getElementById("meetingForm").style.display = "none";
-
-  // Show the selected form
-  if (selectedForm === "job") {
-    document.getElementById("jobForm").style.display = "block";
-  } else if (selectedForm === "meeting") {
-    document.getElementById("meetingForm").style.display = "block";
-  }
 });
 
-// Trigger initial form selection on modal open
-document.getElementById("jobMeeting").dispatchEvent(new Event("change"));
+document.querySelectorAll(".update-btn").forEach((button) => {
+  button.addEventListener("click", async function () {
+    MeetingPage.updateRow();
+    JobPage.updateRow();
+  });
+});
+
+document.querySelectorAll(".delete-btn").forEach((button) => {
+  button.addEventListener("click", async function () {
+    MeetingPage.deleteRow();
+    JobPage.deleteRow();
+  });
+});

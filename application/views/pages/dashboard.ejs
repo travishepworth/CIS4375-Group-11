@@ -11,10 +11,14 @@
         <h2 class="mb-2">
           Upcoming Events
           <button type="button" class="add-button" id="openJobFormButton">
-            +
+            New Job
+          </button>
+          <button type="button" class="add-button" id="openMeetingFormButton">
+            New Meeting
           </button>
         </h2>
         <%- include('../jobForm.ejs'); %>
+        <%- include('../meetingForm.ejs'); %>
         <script type="module" src="js/dashboard.js"></script>
         <%- include('../table.ejs'); %>
 </html>
