@@ -216,6 +216,8 @@ export class Form {
             break;
           }
         }
+      } else if (element.type === "date") {
+        element.value = result[0][key].slice(0, 10);
       } else {
         element.value = result[0][key];
       }
