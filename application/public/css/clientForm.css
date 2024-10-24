@@ -10,7 +10,9 @@
   margin-left: 220px; /* Margin to make space for the sidebar */
 }
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 label {
   display: block;

@@ -7,9 +7,14 @@
         <%- include('../sidebar.ejs'); %>
       </div>
       <div class="flex-grow-1 p-3">
-        <h2 class="mb-4">Supplier List</h2>
+        <h2 class="mb-4">Supplier List
+          <button type="button" class="add-button" id="openSupplierFormButton">
+            +
+          </button>
+        </h2>
+        <%- include('../suppliersForm.ejs'); %>
+        <script type="module" src="js/suppliers.js"></script>
         <%- include('../table.ejs'); %>
-      <script type="module" src="js/suppliers.js"></script>
       </div>
     </div>
   </body>
