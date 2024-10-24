@@ -1,12 +1,12 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
 const columns = [
-  "Emp_ID",
-  "Emp_FName",
-  "Emp_LName",
-  "Emp_Email",
-  "Emp_Address",
-  "Emp_Cell_Phone",
+  "Employee_ID",
+  "Employee_FName",
+  "Employee_LName",
+  "Employee_Email",
+  "Employee_Address",
+  "Employee_Cell_Phone",
 ];
 
 const route = "employees/employee";

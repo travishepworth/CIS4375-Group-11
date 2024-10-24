@@ -83,21 +83,30 @@
 
                 <div class="form-group">
                   <label for="jobDescription">Job Description</label>
-                  <select
-                    id="Job_Description_ID"
-                    name="Job_Description_ID"
-                    class="form-select"
-                  >
-                    <option value="" selected></option>
-                  </select>
+                  <div class="input-group">
+                    <select
+                      id="Job_Description_ID"
+                      name="Job_Description_ID"
+                      class="form-select"
+                    >
+                    </select>
+                    <input id="addJobDescription" class="form-control me-2" />
+                    <button
+                      type="button"
+                      class="delete-button"
+                      id="removeJobDescriptionButton"
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      class="add-button"
+                      id="addJobDescriptionButton"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  class="add-button"
-                  id="Job_Description_Button"
-                >
-                  +
-                </button>
 
                 <div class="form-group">
                   <label for="jobDate">Job Date</label>

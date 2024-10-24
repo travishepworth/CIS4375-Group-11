@@ -12,13 +12,8 @@ const myMiddleware = (req, res, next) => {
 router.use(myMiddleware);
 
 router.post("/:route/:type/addDropdown", (req, res) => {
-  const { route, type } = req.params;
   const value = req.body.value;
   const table = req.body.table;
-  console.log("route: ", route);
-  console.log("type: ", type);
-  console.log("value: ", value);
-  console.log("table: ", table);
 
   const query = `INSERT INTO ${table} (${table}) VALUES (?)`;
 
@@ -27,12 +22,26 @@ router.post("/:route/:type/addDropdown", (req, res) => {
       console.error("Database Query Error: ", err);
       res.status(500).json({ message: "Internal server error" });
     } else {
-      console.log(results);
       res.json({ message: "Dropdown added successfully" });
     }
   });
 });
 
+router.post("/:route/:type/deleteDropdown", (req, res) => {
+  const value = req.body.value;
+  const table = req.body.table;
+
+  const query = `DELETE FROM ${table} WHERE ${table} = ?`;
+
+  connection.query(query, [value], (err, results) => {
+    if (err) {
+      console.error("Database Query Error: ", err);
+      res.status(500).json({ message: "Foreign Key Restraint" });
+    } else {
+      res.json({ results });
+    }
+  });
+});
 
 // Route to get all the dropdown data from a table
 router.post("/:route/:type/tableKeys", (req, res) => {
@@ -149,7 +158,7 @@ router.post("/:route/:type/update/edit", async (req, res) => {
     Client_Address = ?, Client_City = ?, Client_Zip = ?, Country_ID = ?, State_ID = ?, Date_Added = ?,
     Notes = ?, Acquire_Type_ID = ?
     WHERE Client_ID = ?`,
-  }
+  };
   const query = queriesMap[type];
   try {
     const result = await api.databaseUpdate(query, connection, req);

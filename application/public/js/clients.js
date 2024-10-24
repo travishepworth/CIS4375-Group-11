@@ -24,14 +24,14 @@ const elementIds = [
   "state",
   "dateAcquired",
   "notes",
-  "acquisitionMethod",
+  "Acquire_Type_ID",
 ];
 
 const modularIDs = [
   "clientLead",
   "clientType",
   "clientStatus",
-  "acquisitionMethod",
+  "Acquire_Type_ID",
   "country",
   "state",
 ];

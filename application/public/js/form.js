@@ -43,8 +43,9 @@ export class Form {
           const newDropdown = document.getElementById(
             `add${key.charAt(0).toUpperCase() + key.slice(1)}`,
           ).value;
-          console.log(this.editableDropdowns[key]);
-          console.log(newDropdown);
+          document.getElementById(
+            `add${key.charAt(0).toUpperCase() + key.slice(1)}`,
+          ).value = "";
           await this.#updateDropdowns(this.editableDropdowns[key], newDropdown);
           await this.#fetchTableKeys();
         });
@@ -53,7 +54,33 @@ export class Form {
           `remove${key.charAt(0).toUpperCase() + key.slice(1)}Button`,
         )
         .addEventListener("click", async () => {
-          console.log("delete");
+          if (confirm("Are you sure you want to delete this item?")) {
+            // moderatly spagetti code to remove the dropdown
+            const tableToEdit = this.editableDropdowns[key];
+            let elementToRemove = this.editableDropdowns[key] + "_ID";
+            if (!this.editableDropdowns[key].includes("Job")) {
+              if (
+                this.formName === "meetingFormModal" ||
+                this.formName === "jobFormModal"
+              ) {
+                // extract the name from the formName
+                const index = this.formName.indexOf("Form");
+                if (index !== -1) {
+                  elementToRemove += "_";
+                  elementToRemove +=
+                    this.formName.substring(0, index).charAt(0).toUpperCase() +
+                    this.formName.substring(0, index).slice(1);
+                }
+              }
+            }
+            const selectedElement = document.getElementById(
+              `${elementToRemove}`,
+            );
+            const removeDropdown =
+              selectedElement.options[selectedElement.selectedIndex].text;
+            await this.#deleteDropdowns(tableToEdit, removeDropdown);
+            await this.#fetchTableKeys(); // update the dropdowns
+          }
         });
     }
   }
@@ -128,6 +155,23 @@ export class Form {
         },
         body: JSON.stringify({ table: table, value: input }),
       });
+    } catch (error) {
+      console.error("error: ", error);
+    }
+  }
+
+  async #deleteDropdowns(table, input) {
+    try {
+      const response = await fetch(`${this.route}/deleteDropdown`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ table: table, value: input }),
+      });
+      if (!response.ok) {
+        alert("Cannot delete this item, it is in use");
+      } 
     } catch (error) {
       console.error("error: ", error);
     }

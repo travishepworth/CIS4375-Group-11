@@ -76,7 +76,7 @@ const meetingModularIDs = [
 ];
 
 const meetingEditableDropdowns = {"meetingStatus": "MJ_Status"};
-const jobEditableDropdowns = {"jobStatus": "MJ_Status"};
+const jobEditableDropdowns = {"jobStatus": "MJ_Status", "jobDescription": "Job_Description"};
 
 const meetingRoute = "/dashboard/meeting";
 const jobRoute = "/dashboard/job";
@@ -99,7 +99,7 @@ const JobPage = new TableFormWrapper(
 );
 
 document.addEventListener("DOMContentLoaded", () => {
-  MeetingPage.constructTable();
+  JobPage.constructTable();
   MeetingPage.createDropdownListeners();
   JobPage.createDropdownListeners();
 });
