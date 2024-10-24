@@ -59,3 +59,14 @@ textarea {
 .add-button:hover {
   background-color: #0056b3;
 }
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+.delete-button:hover {
+  background-color: darkred;
+}

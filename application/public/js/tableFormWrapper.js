@@ -2,7 +2,7 @@ import { Form } from "./form.js";
 import { Table } from "./table.js";
 
 export class TableFormWrapper {
-  constructor(columns, route, elementIDs, modularIDs, formName = "formModal") {
+  constructor(columns, route, elementIDs, modularIDs, editableDropdowns = {}, formName = "formModal") {
     this.columns = columns;
     this.route = route;
     this.elementIDs = elementIDs;
@@ -11,7 +11,7 @@ export class TableFormWrapper {
 
     this.searchTerm = "";
 
-    this.form = new Form(this.elementIDs, this.modularIDs, this.route, this.formName);
+    this.form = new Form(this.elementIDs, this.modularIDs, this.route, editableDropdowns, this.formName);
   }
 
   // PUBLIC METHODS
@@ -19,6 +19,14 @@ export class TableFormWrapper {
   async search(search) {
     this.searchTerm = search;
     await this.table.constructTable(this.searchTerm);
+  }
+
+  createDropdownListeners() {
+    this.form.createDropdownListeners();
+  }
+
+  updateDropdowns(input) {
+    this.form.updateDropdowns(input);
   }
 
   openForm() {

@@ -39,12 +39,12 @@ const jobModularIDs = [
 ];
 
 const meetingColumns = [
-  "Meet_ID",
+  "Meeting_ID",
   "Client_ID",
-  "Meet_Date",
-  "Meet_Time",
-  "Meet_City",
-  "Meet_Address",
+  "Meeting_Date",
+  "Meeting_Time",
+  "Meeting_City",
+  "Meeting_Address",
   "Quote",
 ];
 
@@ -52,11 +52,11 @@ const meetingElementIDs = [
   "Client_ID_Meeting",
   "CMJ_Type_ID_Meeting",
   "MJ_Status_ID_Meeting",
-  "Meet_Date",
-  "Meet_Time",
-  "Meet_Address",
-  "Meet_City",
-  "Meet_Zip",
+  "Meeting_Date",
+  "Meeting_Time",
+  "Meeting_Address",
+  "Meeting_City",
+  "Meeting_Zip",
   "Country_ID_Meeting",
   "State_ID_Meeting",
   "Quote",
@@ -75,6 +75,9 @@ const meetingModularIDs = [
   "State_ID_Meeting",
 ];
 
+const meetingEditableDropdowns = {"meetingStatus": "MJ_Status"};
+const jobEditableDropdowns = {"jobStatus": "MJ_Status"};
+
 const meetingRoute = "/dashboard/meeting";
 const jobRoute = "/dashboard/job";
 
@@ -83,6 +86,7 @@ const MeetingPage = new TableFormWrapper(
   meetingRoute,
   meetingElementIDs,
   meetingModularIDs,
+  meetingEditableDropdowns,
   "meetingFormModal",
 );
 const JobPage = new TableFormWrapper(
@@ -90,11 +94,14 @@ const JobPage = new TableFormWrapper(
   jobRoute,
   jobElementIDs,
   jobModularIDs,
+  jobEditableDropdowns,
   "jobFormModal",
 );
 
 document.addEventListener("DOMContentLoaded", () => {
   MeetingPage.constructTable();
+  MeetingPage.createDropdownListeners();
+  JobPage.createDropdownListeners();
 });
 
 document

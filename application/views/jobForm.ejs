@@ -57,15 +57,29 @@
 
                 <div class="form-group">
                   <label for="jobstatus">Job Status</label>
-                  <select
-                    id="MJ_Status_ID_Job"
-                    name="MJ_Status_ID_Job"
-                    class="form-select"
-                  ></select>
+                  <div class="input-group">
+                    <select
+                      id="MJ_Status_ID_Job"
+                      name="MJ_Status_ID_Job"
+                      class="form-select"
+                    ></select>
+                    <input id="addJobStatus" class="form-control me-2" />
+                    <button
+                      type="button"
+                      class="delete-button"
+                      id="removeJobStatusButton"
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      class="add-button"
+                      id="addJobStatusButton"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-                <button type="button" class="add-button" id="Job_Status_Button">
-                  +
-                </button>
 
                 <div class="form-group">
                   <label for="jobDescription">Job Description</label>

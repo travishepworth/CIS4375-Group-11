@@ -36,12 +36,22 @@ const modularIDs = [
   "state",
 ];
 
+const editableDropdowns = {"acquisitionMethod": "Acquire_Type"};
+
 const route = "clients/client";
 
-const Page = new TableFormWrapper(columns, route, elementIds, modularIDs, "clientFormModal");
+const Page = new TableFormWrapper(
+  columns,
+  route,
+  elementIds,
+  modularIDs,
+  editableDropdowns,
+  "clientFormModal",
+);
 
 document.addEventListener("DOMContentLoaded", () => {
   Page.constructTable();
+  Page.createDropdownListeners();
 });
 
 document

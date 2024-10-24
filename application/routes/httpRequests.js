@@ -11,6 +11,30 @@ const myMiddleware = (req, res, next) => {
 
 router.use(myMiddleware);
 
+router.post("/:route/:type/addDropdown", (req, res) => {
+  const { route, type } = req.params;
+  const value = req.body.value;
+  const table = req.body.table;
+  console.log("route: ", route);
+  console.log("type: ", type);
+  console.log("value: ", value);
+  console.log("table: ", table);
+
+  const query = `INSERT INTO ${table} (${table}) VALUES (?)`;
+
+  connection.query(query, [value], (err, results) => {
+    if (err) {
+      console.error("Database Query Error: ", err);
+      res.status(500).json({ message: "Internal server error" });
+    } else {
+      console.log(results);
+      res.json({ message: "Dropdown added successfully" });
+    }
+  });
+});
+
+
+// Route to get all the dropdown data from a table
 router.post("/:route/:type/tableKeys", (req, res) => {
   const { type } = req.params;
 
@@ -65,6 +89,7 @@ router.post("/:route/:type/tableKeys", (req, res) => {
     });
 });
 
+// Route to add new data
 router.post("/:route/:type/update/add", async (req, res) => {
   const { route, type } = req.params;
 
@@ -78,7 +103,7 @@ router.post("/:route/:type/update/add", async (req, res) => {
 
     meeting: `INSERT INTO Meeting
     (Client_ID, CMJ_Type_ID, MJ_Status_ID,
-    Meet_Date, Meet_Time, Meet_Address, Meet_City, Meet_Zip, Country_ID, State_ID,
+    Meeting_Date, Meeting_Time, Meeting_Address, Meeting_City, Meeting_Zip, Country_ID, State_ID,
     Quote, Deposit_Collect, Est_Cost, Est_Cost_Notes, Est_Profit, Meeting_Notes)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 
@@ -90,7 +115,6 @@ router.post("/:route/:type/update/add", async (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   };
   const query = queriesMap[type];
-  console.log("query: ", query);
 
   try {
     const results = await api.databaseUpdate(query, connection, req);
@@ -100,6 +124,7 @@ router.post("/:route/:type/update/add", async (req, res) => {
   }
 });
 
+// Route to edit existing data
 router.post("/:route/:type/update/edit", async (req, res) => {
   const { type } = req.params;
 
@@ -113,10 +138,10 @@ router.post("/:route/:type/update/edit", async (req, res) => {
 
     meeting: `UPDATE Meeting
     SET Client_ID = ?, CMJ_Type_ID = ?, MJ_Status_ID = ?,
-    Meet_Date = ?, Meet_Time = ?, Meet_Address = ?, Meet_City = ?, Meet_Zip = ?,
+    Meeting_Date = ?, Meeting_Time = ?, Meeting_Address = ?, Meeting_City = ?, Meeting_Zip = ?,
     Country_ID = ?, State_ID = ?, Quote = ?, Deposit_Collect = ?, Est_Cost = ?,
     Est_Cost_Notes = ?, Est_Profit = ?, Meeting_Notes = ?
-    WHERE Meet_ID = ?`,
+    WHERE Meeting_ID = ?`,
 
     client: `UPDATE Client
     SET Client_Type_ID = ?, CMJ_TYPE_ID = ?, Client_Status_ID = ?,
@@ -134,17 +159,11 @@ router.post("/:route/:type/update/edit", async (req, res) => {
   }
 });
 
-
-
+// Route to delete data
 router.post("/:route/:type/update/delete", async (req, res) => {
   const { route, type } = req.params;
-  console.log("route: ", route);
-  console.log("type: ", type);
 
   let subType = type.charAt(0).toUpperCase() + type.slice(1);
-  if (subType === "Meeting") {
-    subType = "Meet";
-  }
   queryType = type.charAt(0).toUpperCase() + type.slice(1);
 
   const query = `DELETE FROM ${type.charAt(0).toUpperCase() + type.slice(1)}
@@ -157,17 +176,12 @@ router.post("/:route/:type/update/delete", async (req, res) => {
   }
 });
 
+// Route to search for data
 router.post("/:route/:type/search", async (req, res) => {
   const { route, type } = req.params;
 
   let subType = type.charAt(0).toUpperCase() + type.slice(1);
   queryType = type.charAt(0).toUpperCase() + type.slice(1);
-
-  if (subType === "Meeting") {
-    subType = "Meet";
-  } else if (subType === "Employee") {
-    subType = "Emp";
-  }
 
   let query = `SELECT * FROM ${queryType} WHERE ${subType}_ID LIKE ?`;
 
@@ -194,21 +208,16 @@ router.post("/:route/:type/search", async (req, res) => {
   }
 });
 
+//  Route to fill form with data
 router.post("/:route/:type/fill", async (req, res) => {
   const { route, type } = req.params;
-  console.log("route: ", route);
-  console.log("type: ", type);
 
   let subType = type.charAt(0).toUpperCase() + type.slice(1);
-  if (subType === "Meeting") {
-    subType = "Meet";
-  }
 
   const query = `SELECT * FROM ${type.charAt(0).toUpperCase() + type.slice(1)}
     WHERE ${subType}_ID = ?`;
   try {
     const results = await api.idSearch(query, connection, req);
-    console.log("results: ", results);
     res.json(results);
   } catch (err) {
     console.error("error: ", err);

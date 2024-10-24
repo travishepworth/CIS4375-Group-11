@@ -1,12 +1,19 @@
 // Form delcaration module
 
 export class Form {
-  constructor(elementIDs, modularIDs, route, formName = "formModal") {
+  constructor(
+    elementIDs,
+    modularIDs,
+    route,
+    editableDropdowns = {},
+    formName = "formModal",
+  ) {
     this.elementIDs = elementIDs;
     this.modularIDs = modularIDs;
     this.route = route;
     this.id = -1;
     this.formName = formName;
+    this.editableDropdowns = editableDropdowns;
 
     this.formModal = new bootstrap.Modal(
       document.getElementById(`${formName}`),
@@ -21,6 +28,34 @@ export class Form {
     await this.#fetchTableKeys();
 
     this.formModal.show();
+  }
+
+  createDropdownListeners() {
+    if (Object.keys(this.editableDropdowns).length === 0) {
+      return;
+    }
+    for (const key in this.editableDropdowns) {
+      document
+        .getElementById(
+          `add${key.charAt(0).toUpperCase() + key.slice(1)}Button`,
+        )
+        .addEventListener("click", async () => {
+          const newDropdown = document.getElementById(
+            `add${key.charAt(0).toUpperCase() + key.slice(1)}`,
+          ).value;
+          console.log(this.editableDropdowns[key]);
+          console.log(newDropdown);
+          await this.#updateDropdowns(this.editableDropdowns[key], newDropdown);
+          await this.#fetchTableKeys();
+        });
+      document
+        .getElementById(
+          `remove${key.charAt(0).toUpperCase() + key.slice(1)}Button`,
+        )
+        .addEventListener("click", async () => {
+          console.log("delete");
+        });
+    }
   }
 
   closeForm() {
@@ -84,10 +119,22 @@ export class Form {
 
   // PRIVATE METHODS
 
+  async #updateDropdowns(table, input) {
+    try {
+      const response = await fetch(`${this.route}/addDropdown`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ table: table, value: input }),
+      });
+    } catch (error) {
+      console.error("error: ", error);
+    }
+  }
+
   async #executeQuery(type, elements) {
     try {
-      console.log(`${this.route}/update/${type}`)
-
       const response = await fetch(`${this.route}/update/${type}`, {
         method: "POST",
         headers: {
@@ -97,7 +144,6 @@ export class Form {
       });
 
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (error) {
       console.error("error: ", error);
@@ -110,7 +156,7 @@ export class Form {
     let index = 0;
     let jobMeetIdExists = false;
     for (const key in result[0]) {
-      if (key === "Job_ID" || key === "Meet_ID") {
+      if (key === "Job_ID" || key === "Meeting_ID") {
         jobMeetIdExists = true;
         continue;
       } else if (key === "Client_ID" && !jobMeetIdExists) {
