@@ -7,9 +7,14 @@
         <%- include('../sidebar.ejs'); %>
       </div>
       <div class="flex-grow-1 p-3">
-        <h2 class="mb-4">Employee List</h2>
-        <%- include('../table.ejs'); %>
+        <h2 class="mb-4">Employee List
+          <button type="button" class="add-button" id="openEmployeeFormButton">
+            +
+          </button>
+        </h2>
+        <%- include('../employeeForm.ejs'); %>
         <script type="module" src="js/employees.js"></script>
+        <%- include('../table.ejs'); %>
       </div>
     </div>
   </body>

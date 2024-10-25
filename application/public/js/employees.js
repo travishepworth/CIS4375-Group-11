@@ -25,3 +25,12 @@ document
     const search = document.getElementById("search").value;
     Page.search(search);
   });
+
+
+// Handle the "+" button click event to open the modal
+  document.getElementById('openEmployeeFormButton').addEventListener('click', function () {
+    const employeeFormModal = new bootstrap.Modal(document.getElementById('employeeFormModal'));
+    employeeFormModal.show();
+  });
+
+  
