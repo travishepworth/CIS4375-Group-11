@@ -16,54 +16,102 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="supplierFormModalLabel">Employee Form</h5>
+        <h5 class="modal-title" id="supplierFormModalLabel">Supplier Form</h5>
         <button
           type="button"
           class="btn-close"
+          id="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
       </div>
       <div class="modal-body">
-        <form id="employeeForm">
+        <form id="employeeForm" class="form-group">
+
           <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" />
+            <label for="supplierType">Supplier Type</label>
+            <select id="Supp_Type_ID" name="Supp_Type_ID" class="form-select" ></select>
           </div>
+
           <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" />
+            <label for="supplierStatus">Supplier Status</label>
+            <select id="Supplier_Status" name="Supplier_Status_" class="form-select"></select>
           </div>
+
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" />
+            <label for="supplierFname">First Name</label>
+            <input type="text" id="Supplier_FName" name="Supplier_FName"/>
           </div>
+
           <div class="form-group">
-            <label for="position">Position</label>
-            <input type="text" id="position" name="position" />
+            <label for="supplierLname">Last Name</label>
+            <input type="text" id="Supplier_LName" name="Supplier_LName"/>
           </div>
+
           <div class="form-group">
-            <label for="department">Department</label>
-            <input type="text" id="department" name="department" />
+            <label for="supplierEmail">Email</label>
+            <input type="text" id="Supplier_Email" name="Supplier_Email"/>
           </div>
+
+          <div class="form-group">
+            <label for="supplierCell">Cell Phone</label>
+            <input type="tel" id="Supplier_Cell_Phone" name="Supplier_Cell_Phone"/>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierWork">Work Phone</label>
+            <input type="tel" id="Supplier_Work_Phone" name="Supplier_Work_Phone"/>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierAddress">Address</label>
+            <input type="text" id="Supplier_Address" name="Supplier_Address"/>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierCity">City</label>
+            <input type="text" id="Supplier_City" name="Supplier_City"/>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierZipcode">Zip Code</label>
+            <input type="text" id="Supplier_Zip" name="Supplier_Zip"/>
+          </div>
+
+          <div class="form-group">
+            <label for="suppierCountry">Country</label>
+            <select id="Country_ID" name="Country_ID" class="form-select"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierState">State</label>
+            <select id="State_ID" name="State_ID" class="form-select"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierDateAdded">Date Added</label>
+            <input type="date" id="Date_Added" name="Date_Added" class="form-control"/>
+          </div>
+          
+          <div class="form-group">
+            <label for="supplierNotes">Supplier Notes</label>
+            <textarea id="Notes" name="Notes" class="form-control"></textarea>
+          </div>
+
         </form>
       </div>
       <div class="modal-footer">
         <button
           type="button"
-          id="saveButton"
-          class="save-btn"
+          id="updateButton"
+          class="update-btn"
           form="employeeForm"
         >
-          Save
+          Update
         </button>
-        <button
-          type="button"
-          id="cancelButton"
-          class="cancel-btn"
-          data-bs-dismiss="modal"
+        <button type="button" id="deleteButton" class="delete-btn"
         >
-          Cancel
+          Delete
         </button>
       </div>
     </div>
