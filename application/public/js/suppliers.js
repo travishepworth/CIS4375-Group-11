@@ -81,3 +81,9 @@ document
     Page.updateRow();
   });
 
+document
+  .getElementById("btn-close")
+  .addEventListener("click", async function () {
+    Page.closeForm();
+  });
+
