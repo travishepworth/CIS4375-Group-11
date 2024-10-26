@@ -71,6 +71,18 @@ router.post("/:route/:type/tableKeys", (req, res) => {
       "SELECT * FROM Country;",
       "SELECT * FROM State;",
     ],
+    employee: [
+      "SELECT * FROM Employee_Status;",
+      "SELECT * FROM Employee_Type;",
+      "SELECT * FROM Country;",
+      "SELECT * FROM State;",
+    ],
+    supplier: [
+      "SELECT * FROM Supplier_Type;",
+      "SELECT * FROM Supplier_Status;",
+      "SELECT * FROM Country;",
+      "SELECT * FROM State;",
+    ],
   };
 
   const queries = queriesMap[type];
@@ -122,6 +134,18 @@ router.post("/:route/:type/update/add", async (req, res) => {
     Client_Address, Client_City, Client_Zip, Country_ID, State_ID, Date_Added,
     Notes, Acquire_Type_ID)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+
+    employee: `INSERT INTO Employee
+    (Employee_Status_ID, Employee_Type_ID, Employee_FName, Employee_LName,
+    Employee_Email, Employee_Cell_Phone, Employee_Address,  Employee_City, Employee_Zip,
+    Country_ID, State_ID, Date_Added, Employee_Notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+
+    supplier: `INSERT INTO Supplier
+    (Supp_Type_ID, Supplier_FName, Supplier_LName,
+    Supplier_Email, Supplier_Cell_Phone, Supplier_Work_Phone, Supplier_Address, Supplier_City,
+    Supplier_Zip, Country_ID, State_ID, Date_Added, Notes, Supplier_Status_ID)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   };
   const query = queriesMap[type];
 
@@ -158,6 +182,18 @@ router.post("/:route/:type/update/edit", async (req, res) => {
     Client_Address = ?, Client_City = ?, Client_Zip = ?, Country_ID = ?, State_ID = ?, Date_Added = ?,
     Notes = ?, Acquire_Type_ID = ?
     WHERE Client_ID = ?`,
+
+    employee: `UPDATE Employee
+    SET Employee_Status_ID = ?, Employee_Type_ID = ?, Employee_FName = ?, Employee_LName = ?,
+    Employee_Email = ?, Employee_Cell_Phone = ?, Employee_Address = ?, Employee_City = ?, Employee_Zip = ?,
+    Country_ID = ?, State_ID = ?, Date_Added = ?, Employee_Notes = ?
+    WHERE Employee_ID = ?`,
+
+    supplier: `UPDATE Supplier
+    SET Supp_Type_ID = ?, Supplier_FName = ?, Supplier_LName = ?,
+    Supplier_Email = ?, Supplier_Cell_Phone = ?, Supplier_Work_Phone = ?, Supplier_Address = ?, Supplier_City = ?,
+    Supplier_Zip = ?, Country_ID = ?, State_ID = ?, Date_Added = ?, Notes = ?, Supplier_Status_ID = ?
+    WHERE Supplier_ID = ?`,
   };
   const query = queriesMap[type];
   try {

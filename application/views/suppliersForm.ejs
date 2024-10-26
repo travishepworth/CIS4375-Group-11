@@ -1,3 +1,4 @@
+<!doctype html>
 <!-- Bootstrap CSS -->
 <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -6,119 +7,180 @@
 <link href="css/clientForm.css" rel="stylesheet" />
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="supplierFormModal"
-  tabindex="-1"
-  aria-labelledby="supplierFormModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="supplierFormModalLabel">Supplier Form</h5>
-        <button
-          type="button"
-          class="btn-close"
-          id="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form id="employeeForm" class="form-group">
+<body>
+  <div
+    class="modal fade"
+    id="supplierFormModal"
+    tabindex="-1"
+    aria-labelledby="supplierFormModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="supplierFormModalLabel">Supplier Form</h5>
+          <button
+            type="button"
+            class="btn-close"
+            id="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="employeeForm">
+            <div class="form-group">
+              <label for="supplierType">Supplier Type</label>
+              <div class="input-group">
+                <select
+                  id="Supplier_Type_ID"
+                  name="Supp_Type_ID"
+                  class="form-select"
+                ></select>
+                <input id="addSupplierType" class="form-control me-2" />
+                <button
+                  type="button"
+                  class="delete-button"
+                  id="removeSupplierTypeButton"
+                >
+                  -
+                </button>
+                <button
+                  type="button"
+                  class="add-button"
+                  id="addSupplierTypeButton"
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label for="supplierType">Supplier Type</label>
-            <select id="Supp_Type_ID" name="Supp_Type_ID" class="form-select" ></select>
-          </div>
+            <div class="form-group">
+              <label for="supplierStatus">Supplier Status</label>
+              <div class="input-group">
+                <select
+                  id="Supplier_Status_ID"
+                  name="Supplier_Status_"
+                  class="form-select"
+                ></select>
+                <input id="addSupplierStatus" class="form-control me-2" />
+                <button
+                  type="button"
+                  class="delete-button"
+                  id="removeSupplierStatusButton"
+                >
+                  -
+                </button>
+                <button
+                  type="button"
+                  class="add-button"
+                  id="addSupplierStatusButton"
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label for="supplierStatus">Supplier Status</label>
-            <select id="Supplier_Status" name="Supplier_Status_" class="form-select"></select>
-          </div>
+            <div class="form-group">
+              <label for="supplierFname">First Name</label>
+              <input type="text" id="supplierFirstName" name="Supplier_FName" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierFname">First Name</label>
-            <input type="text" id="Supplier_FName" name="Supplier_FName"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierLname">Last Name</label>
+              <input type="text" id="supplierLastName" name="Supplier_LName" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierLname">Last Name</label>
-            <input type="text" id="Supplier_LName" name="Supplier_LName"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierEmail">Email</label>
+              <input type="text" id="supplierEmail" name="Supplier_Email" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierEmail">Email</label>
-            <input type="text" id="Supplier_Email" name="Supplier_Email"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierCell">Cell Phone</label>
+              <input
+                type="text"
+                id="supplierCellPhone"
+                name="Supplier_Cell_Phone"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierCell">Cell Phone</label>
-            <input type="tel" id="Supplier_Cell_Phone" name="Supplier_Cell_Phone"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierWork">Work Phone</label>
+              <input
+                type="text"
+                id="supplierWorkPhone"
+                name="Supplier_Work_Phone"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierWork">Work Phone</label>
-            <input type="tel" id="Supplier_Work_Phone" name="Supplier_Work_Phone"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierAddress">Address</label>
+              <input type="text" id="supplierAddress" name="Supplier_Address" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierAddress">Address</label>
-            <input type="text" id="Supplier_Address" name="Supplier_Address"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierCity">City</label>
+              <input type="text" id="supplierCity" name="Supplier_City" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierCity">City</label>
-            <input type="text" id="Supplier_City" name="Supplier_City"/>
-          </div>
+            <div class="form-group">
+              <label for="supplierZipcode">Zip Code</label>
+              <input type="text" id="supplierZip" name="Supplier_Zip" />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierZipcode">Zip Code</label>
-            <input type="text" id="Supplier_Zip" name="Supplier_Zip"/>
-          </div>
+            <div class="form-group">
+              <label for="suppierCountry">Country</label>
+              <select
+                id="Country_ID"
+                name="Country_ID"
+                class="form-select"
+              ></select>
+            </div>
 
-          <div class="form-group">
-            <label for="suppierCountry">Country</label>
-            <select id="Country_ID" name="Country_ID" class="form-select"></select>
-          </div>
+            <div class="form-group">
+              <label for="supplierState">State</label>
+              <select
+                id="State_ID"
+                name="State_ID"
+                class="form-select"
+              ></select>
+            </div>
 
-          <div class="form-group">
-            <label for="supplierState">State</label>
-            <select id="State_ID" name="State_ID" class="form-select"></select>
-          </div>
+            <div class="form-group">
+              <label for="supplierDateAdded">Date Added</label>
+              <input
+                type="date"
+                id="dateAdded"
+                name="Date_Added"
+                class="form-control"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="supplierDateAdded">Date Added</label>
-            <input type="date" id="Date_Added" name="Date_Added" class="form-control"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="supplierNotes">Supplier Notes</label>
-            <textarea id="Notes" name="Notes" class="form-control"></textarea>
-          </div>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="updateButton"
-          class="update-btn"
-          form="employeeForm"
-        >
-          Update
-        </button>
-        <button type="button" id="deleteButton" class="delete-btn"
-        >
-          Delete
-        </button>
+            <div class="form-group">
+              <label for="supplierNotes">Supplier Notes</label>
+              <textarea id="notes" name="Notes" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="updateButton"
+            class="update-btn"
+            form="employeeForm"
+          >
+            Update
+          </button>
+          <button type="button" id="deleteButton" class="delete-btn">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 
 <!-- Bootstrap JS and Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-

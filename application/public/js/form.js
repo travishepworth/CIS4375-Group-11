@@ -105,7 +105,7 @@ export class Form {
       await this.#fetchTableKeys();
       this.formModal.show();
 
-      this.#fillForm(result);
+      await this.#fillForm(result);
     } catch (error) {
       console.error("error: ", error);
     }
@@ -171,7 +171,7 @@ export class Form {
       });
       if (!response.ok) {
         alert("Cannot delete this item, it is in use");
-      } 
+      }
     } catch (error) {
       console.error("error: ", error);
     }
@@ -194,16 +194,17 @@ export class Form {
     }
   }
 
-  #fillForm(result) {
+  async #fillForm(result) {
     // auto fill the form with data from result
     this.#clearForm();
+    const primaryKeys = ["Client_ID", "Employee_ID", "Supplier_ID"];
     let index = 0;
     let jobMeetIdExists = false;
     for (const key in result[0]) {
       if (key === "Job_ID" || key === "Meeting_ID") {
         jobMeetIdExists = true;
         continue;
-      } else if (key === "Client_ID" && !jobMeetIdExists) {
+      } else if (primaryKeys.includes(key) && !jobMeetIdExists) {
         continue;
       }
       const element = document.getElementById(this.elementIDs[index]);
