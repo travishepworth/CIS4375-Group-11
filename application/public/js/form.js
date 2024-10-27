@@ -11,7 +11,7 @@ export class Form {
     this.elementIDs = elementIDs;
     this.modularIDs = modularIDs;
     this.route = route;
-    this.id = -1;
+    this.id = -2;
     this.formName = formName;
     this.editableDropdowns = editableDropdowns;
 
@@ -86,7 +86,7 @@ export class Form {
   }
 
   closeForm() {
-    this.resetID();
+    this.id = -2;
     this.formModal.hide();
   }
 

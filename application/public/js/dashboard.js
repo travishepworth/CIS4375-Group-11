@@ -1,13 +1,14 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
-const jobColumns = [
-  "Job_ID",
-  "Client_ID",
-  "Job_Date",
-  "Job_Time",
-  "Job_City",
-  "Job_Address",
-];
+const jobColumns = {
+  "Job_ID": "Type",
+  "Client_ID": "Client",
+  "Job_Date": "Date",
+  "Job_Time": "Time",
+  "Job_City": "City",
+  "Job_Address": "Address",
+  "Job_Profit": "Profit/Quote",
+};
 
 const jobElementIDs = [
   "Client_ID_Job",
@@ -38,15 +39,15 @@ const jobModularIDs = [
   "State_ID_Job",
 ];
 
-const meetingColumns = [
-  "Meeting_ID",
-  "Client_ID",
-  "Meeting_Date",
-  "Meeting_Time",
-  "Meeting_City",
-  "Meeting_Address",
-  "Quote",
-];
+const meetingColumns = {
+  "Meeting_ID": "Type",
+  "Client_ID": "Client_ID",
+  "Meeting_Date": "Date",
+  "Meeting_Time": "Time",
+  "Meeting_City": "City",
+  "Meeting_Address": "Address",
+  "Quote": "Quote",
+};
 
 const meetingElementIDs = [
   "Client_ID_Meeting",
@@ -100,6 +101,7 @@ const JobPage = new TableFormWrapper(
 
 document.addEventListener("DOMContentLoaded", () => {
   JobPage.constructTable();
+  MeetingPage.constructTable(false);
   MeetingPage.createDropdownListeners();
   JobPage.createDropdownListeners();
 });
@@ -110,7 +112,10 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
+    MeetingPage.refreshTable();
+    JobPage.refreshTable();
     MeetingPage.search(search);
+    JobPage.search(search, false);
   });
 
 document
@@ -134,14 +139,22 @@ document.querySelectorAll(".btn-close").forEach((button) => {
 
 document.querySelectorAll(".update-btn").forEach((button) => {
   button.addEventListener("click", async function () {
+    MeetingPage.refreshTable();
+    JobPage.refreshTable();
     MeetingPage.updateRow();
     JobPage.updateRow();
+    JobPage.redrawTable();
+    MeetingPage.redrawTable(false);
   });
 });
 
 document.querySelectorAll(".delete-btn").forEach((button) => {
   button.addEventListener("click", async function () {
+    MeetingPage.refreshTable();
+    JobPage.refreshTable();
     MeetingPage.deleteRow();
     JobPage.deleteRow();
+    JobPage.redrawTable();
+    MeetingPage.redrawTable(false);
   });
 });

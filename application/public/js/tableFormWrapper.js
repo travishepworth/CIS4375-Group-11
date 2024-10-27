@@ -16,9 +16,10 @@ export class TableFormWrapper {
 
   // PUBLIC METHODS
 
-  async search(search) {
+  async search(search, header = true) {
     this.searchTerm = search;
-    await this.table.constructTable(this.searchTerm);
+    // this.#refreshTable();
+    await this.table.constructTable(this.searchTerm, header);
   }
 
   createDropdownListeners() {
@@ -39,15 +40,15 @@ export class TableFormWrapper {
 
   updateRow() {
     this.form.updateRow();
-    this.#refreshTable();
+    // this.#refreshTable();
   }
 
   deleteRow() {
     this.form.deleteRow();
-    this.#refreshTable();
+    // this.#refreshTable();
   }
 
-  constructTable() {
+  constructTable(includeHeader = true) {
     this.table = new Table(
       this.columns,
       this.route,
@@ -55,13 +56,17 @@ export class TableFormWrapper {
       this.modularIDs,
       this.form,
     );
-    this.table.constructTable();
+    this.table.constructTable(this.searchTerm, includeHeader);
+  }
+
+  redrawTable(header = true) {
+    this.table.constructTable(this.searchTerm, header);
   }
 
   // PRIVATE METHODS
-  #refreshTable() {
+  refreshTable() {
     if (this.table) {
-      this.table.constructTable(this.searchTerm);
+      this.table.clearTable();
     }
   }
 }

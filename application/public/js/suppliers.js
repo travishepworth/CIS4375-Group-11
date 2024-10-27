@@ -1,13 +1,13 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
-const columns = [
-  "Supplier_ID",
-  "Supplier_FName",
-  "Supplier_LName",
-  "Supplier_Email",
-  "Supplier_Address",
-  "Supplier_Cell_Phone",
-];
+const columns = {
+  "Supplier_ID": "ID",
+  "Supplier_FName": "First Name",
+  "Supplier_LName": "Last Name",
+  "Supplier_Email": "Email",
+  "Supplier_Address": "Address",
+  "Supplier_Cell_Phone": "Cell Phone",
+};
 
 const elementIDs = [
   "Supplier_Type_ID",
@@ -60,6 +60,7 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
+    Page.refreshTable();
     Page.search(search);
   });
 // Handle the "+" button click event to open the modal
@@ -73,12 +74,16 @@ document
   .getElementById("deleteButton")
   .addEventListener("click", async function () {
     Page.deleteRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });
 
 document
   .getElementById("updateButton")
   .addEventListener("click", async function () {
     Page.updateRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });
 
 document

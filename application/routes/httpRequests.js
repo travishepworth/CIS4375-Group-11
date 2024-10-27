@@ -221,6 +221,16 @@ router.post("/:route/:type/update/delete", async (req, res) => {
   }
 });
 
+router.post("/:route/clientID", async (req, res) => {
+  query = `SELECT Client_FName, Client_LName, Client_ID FROM Client`;
+  try {
+    const results = await api.returnAllClients(query, connection);
+    res.json(results);
+  } catch (err) {
+    console.error("error: ", err);
+  }
+});
+
 // Route to search for data
 router.post("/:route/:type/search", async (req, res) => {
   const { route, type } = req.params;

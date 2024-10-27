@@ -1,12 +1,12 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
-const columns = [
-  "Client_ID",
-  "Client_FName",
-  "Client_LName",
-  "Client_Email",
-  "Client_Cell_Phone",
-];
+const columns = {
+  "Client_ID": "ID",
+  "Client_FName": "First Name",
+  "Client_LName": "Last Name",
+  "Client_Email": "Email",
+  "Client_Cell_Phone": "Cell Phone",
+};
 
 const elementIds = [
   "clientLead",
@@ -60,6 +60,7 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
+    Page.refreshTable();
     Page.search(search);
   });
 
@@ -80,10 +81,14 @@ document
   .getElementById("updateButton")
   .addEventListener("click", async function () {
     Page.updateRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });
 
 document
   .getElementById("deleteButton")
   .addEventListener("click", async function () {
     Page.deleteRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });

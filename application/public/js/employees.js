@@ -1,14 +1,14 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
-const columns = [
-  "Employee_ID",
-  "Employee_FName",
-  "Employee_LName",
-  "Employee_Email",
-  "Employee_Address",
-  "Employee_Cell_Phone",
-  "Employee_Type_ID",
-];
+const columns = {
+  "Employee_ID": "ID",
+  "Employee_FName": "First Name",
+  "Employee_LName": "Last Name",
+  "Employee_Email": "Email",
+  "Employee_Address": "Address",
+  "Employee_Cell_Phone": "Cell Phone",
+  "Employee_Type_ID": "Type",
+};
 
 const elementIDs = [
   "Employee_Status_ID",
@@ -60,6 +60,7 @@ document
     event.preventDefault();
 
     const search = document.getElementById("search").value;
+    Page.refreshTable();
     Page.search(search);
   });
 
@@ -74,12 +75,16 @@ document
   .getElementById("deleteButton")
   .addEventListener("click", async function () {
     Page.deleteRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });
 
 document
   .getElementById("updateButton")
   .addEventListener("click", async function () {
     Page.updateRow();
+    Page.refreshTable();
+    Page.redrawTable();
   });
 
 document

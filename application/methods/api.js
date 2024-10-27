@@ -19,6 +19,17 @@ async function tableQuery(query, connection, req) {
   }
 };
 
+async function returnAllClients(query, connection) {
+  try {
+    const [results] = await connection
+      .promise()
+      .query(query);
+    return results;
+  } catch (err) {
+    console.error("database query error: ", err);
+  }
+}
+
 async function idSearch(query, connection, req) {
   const search = req.body.id;
 
@@ -44,4 +55,4 @@ async function databaseUpdate(query, connection, req) {
   }
 };
 
-export { tableQuery, databaseUpdate, idSearch };
+export { tableQuery, databaseUpdate, idSearch, returnAllClients };
