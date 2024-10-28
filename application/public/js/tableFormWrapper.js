@@ -47,8 +47,12 @@ export class TableFormWrapper {
     this.form.deleteRow();
     // this.#refreshTable();
   }
+  
+  sortTableByDate() {
+    this.table.sortTableByDate();
+  }
 
-  constructTable(includeHeader = true) {
+  async constructTable(includeHeader = true) {
     this.table = new Table(
       this.columns,
       this.route,
@@ -56,11 +60,11 @@ export class TableFormWrapper {
       this.modularIDs,
       this.form,
     );
-    this.table.constructTable(this.searchTerm, includeHeader);
+    await this.table.constructTable(this.searchTerm, includeHeader);
   }
 
-  redrawTable(header = true) {
-    this.table.constructTable(this.searchTerm, header);
+  async redrawTable(header = true) {
+    await this.table.constructTable(this.searchTerm, header);
   }
 
   // PRIVATE METHODS

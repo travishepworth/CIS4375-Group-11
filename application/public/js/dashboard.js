@@ -99,11 +99,12 @@ const JobPage = new TableFormWrapper(
   "jobFormModal",
 );
 
-document.addEventListener("DOMContentLoaded", () => {
-  JobPage.constructTable();
-  MeetingPage.constructTable(false);
+document.addEventListener("DOMContentLoaded", async () => {
+  await JobPage.constructTable();
+  await MeetingPage.constructTable(false);
   MeetingPage.createDropdownListeners();
   JobPage.createDropdownListeners();
+  JobPage.sortTableByDate();
 });
 
 document
@@ -114,8 +115,9 @@ document
     const search = document.getElementById("search").value;
     MeetingPage.refreshTable();
     JobPage.refreshTable();
-    MeetingPage.search(search);
-    JobPage.search(search, false);
+    await JobPage.search(search);
+    await MeetingPage.search(search, false);
+    JobPage.sortTableByDate();
   });
 
 document
@@ -143,8 +145,9 @@ document.querySelectorAll(".update-btn").forEach((button) => {
     JobPage.refreshTable();
     MeetingPage.updateRow();
     JobPage.updateRow();
-    JobPage.redrawTable();
-    MeetingPage.redrawTable(false);
+    await JobPage.redrawTable();
+    await MeetingPage.redrawTable(false);
+    JobPage.sortTableByDate();
   });
 });
 
@@ -154,7 +157,8 @@ document.querySelectorAll(".delete-btn").forEach((button) => {
     JobPage.refreshTable();
     MeetingPage.deleteRow();
     JobPage.deleteRow();
-    JobPage.redrawTable();
-    MeetingPage.redrawTable(false);
+    await JobPage.redrawTable();
+    await MeetingPage.redrawTable(false);
+    JobPage.sortTableByDate();
   });
 });
