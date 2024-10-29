@@ -87,6 +87,22 @@ export class Table {
           const newCell = newRow.insertCell();
           const contents = this.#formatTime(row[key]);
           newCell.innerHTML = contents;
+        } else if ((key === "Quote" || key === "Job_Profit") && jobMeetingTable) {
+          // case to display the estimated profit if the form is a job or meeting
+          // job: previous deposit + charge - job cost
+          // meeting: quote - cost
+          if (this.form.formName.includes("meeting")) {
+            const quote = row[key];
+            const charge = row["Est_Cost"];
+            const newCell = newRow.insertCell();
+            newCell.innerHTML = quote - charge;
+          } else if (this.form.formName.includes("job")) {
+            const charge = row["Charge"];
+            const jobCost = row["Job_Cost"];
+            const deposit = row["Prev_Deposit"];
+            const newCell = newRow.insertCell();
+            newCell.innerHTML = deposit + charge - jobCost;
+          }
         } else {
           // default case
           const newCell = newRow.insertCell();
