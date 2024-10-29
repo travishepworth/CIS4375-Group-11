@@ -139,9 +139,15 @@ export class Table {
   #formatTime(time) {
     const hours = parseInt(time.slice(0, 2));
     const minutes = time.slice(3, 5);
-    if (hours > 12) {
+    if (hours >= 12) {
+      if (hours === 12) {
+        return `12:${minutes} PM`;
+      }
       return `${hours - 12}:${minutes} PM`;
     } else {
+      if (hours === 0) {
+        return `12:${minutes} AM`;
+      };
       return `${hours}:${minutes} AM`;
     }
   }
