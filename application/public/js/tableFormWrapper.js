@@ -30,12 +30,34 @@ export class TableFormWrapper {
     // Format time to milltary exluding AM or PM
     return `${hour.toString().padStart(2, '0')}:${minute}`;
   }
-  
+
+  convertDateString(search,Dateregex) {
+    const match = search.match(Dateregex);
+    // Extracts month and day
+    let month = match[1];
+    let day = match[2];
+    // Adds a 0 if needed to both month and day
+    if (month.length === 1){
+      month = `0${month}`
+    }
+    if (day.length === 1){
+      day = `0${day}`
+    }
+    //returns string output
+    
+    return `${month}-${day}`;
+    // return `${month}-${day}-${match[3]}`; !! Full return when year is working in the application
+  }
   
   async search(search, header = true) {
     const Timeregex = /^(0?[1-9]|1[0-2]):([0-5][0-9])\s?(AM|PM|am|pm)$/;
+    const Dateregex = /^(0?[1-9]|1[0-2])-(0?[1-9]|1[0-9]|2[0-9]|3[01])$/;
+    // const Dateregex = /^(0?[1-9]|1[0-2])-(0?[1-9]|1[0-9]|2[0-9]|3[01])-(\d{4})$/; !! Full dateregex when year is working in the application
     if (Timeregex.test(search) == true){
       search = this.convertToMilltaryString(search,Timeregex)
+    }
+    if (Dateregex.test(search)){
+      search = this.convertDateString(search,Dateregex)
     }
     this.searchTerm = search;
     // this.#refreshTable();
