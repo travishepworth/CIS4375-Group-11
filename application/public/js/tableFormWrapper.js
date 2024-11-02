@@ -15,8 +15,8 @@ export class TableFormWrapper {
   }
 
   // PUBLIC METHODS
-  convertToMilltaryString(search,datereg) {
-    const match = search.match(datereg);
+  convertToMilltaryString(search,Timeregex) {
+    const match = search.match(Timeregex);
     // Extract the hour, minute, and period (AM/PM)
     let hour = parseInt(match[1], 10);
     const minute = match[2] || "00";
@@ -33,9 +33,9 @@ export class TableFormWrapper {
   
   
   async search(search, header = true) {
-    const dateregex = /^(0?[1-9]|1[0-2]):([0-5][0-9])\s?(AM|PM|am|pm)$/;
-    if (dateregex.test(search) == true){
-      search = this.convertToMilltaryString(search,dateregex)
+    const Timeregex = /^(0?[1-9]|1[0-2]):([0-5][0-9])\s?(AM|PM|am|pm)$/;
+    if (Timeregex.test(search) == true){
+      search = this.convertToMilltaryString(search,Timeregex)
     }
     this.searchTerm = search;
     // this.#refreshTable();
