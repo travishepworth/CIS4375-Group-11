@@ -15,8 +15,28 @@ export class TableFormWrapper {
   }
 
   // PUBLIC METHODS
-
+  convertToMilltaryString(search,datereg) {
+    const match = search.match(datereg);
+    // Extract the hour, minute, and period (AM/PM)
+    let hour = parseInt(match[1], 10);
+    const minute = match[2] || "00";
+    const period = match[3];   
+    // Convert hour based on AM/PM
+    if ((period === "PM" || period === "pm") && hour !== 12) {
+        hour += 12;
+    } else if ((period === "AM" || period === "am") && hour === 12) {
+        hour = 0;
+    }
+    // Format time to milltary exluding AM or PM
+    return `${hour.toString().padStart(2, '0')}:${minute}`;
+  }
+  
+  
   async search(search, header = true) {
+    const dateregex = /^(0?[1-9]|1[0-2]):([0-5][0-9])\s?(AM|PM|am|pm)$/;
+    if (dateregex.test(search) == true){
+      search = this.convertToMilltaryString(search,dateregex)
+    }
     this.searchTerm = search;
     // this.#refreshTable();
     await this.table.constructTable(this.searchTerm, header);

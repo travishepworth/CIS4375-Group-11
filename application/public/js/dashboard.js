@@ -7,7 +7,7 @@ const jobColumns = {
   "Job_Time": "Time",
   "Job_City": "City",
   "Job_Address": "Address",
-  "Job_Profit": "Profit/Quote",
+  "Job_Profit": "Profit / Estimated Profit",
 };
 
 const jobElementIDs = [
