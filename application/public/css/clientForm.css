@@ -79,3 +79,13 @@ textarea {
 .delete-button:hover {
   background-color: darkred;
 }
+.modal-header {
+  background-color: #343a40 !important;
+  color: #ffffff;
+  border-bottom: 1px solid #0c0b0b;
+}
+.btn-close {
+  filter: invert(1);
+  opacity: 1; /* Ensures full visibility */
+}
+

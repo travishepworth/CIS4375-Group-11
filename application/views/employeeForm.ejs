@@ -17,7 +17,7 @@
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="employeeFormModalLabel">Employee Form</h5>
           <button
             type="button"
@@ -29,25 +29,25 @@
         </div>
         <div class="modal-body">
           <form id="employeeForm">
-            <div class="form-group">
-              <label for="employeeType">Employee Type</label>
+            <div class="mb-3">
+              <label for="employeeType" class="form-label">Employee Type</label>
               <div class="input-group">
                 <select
                   id="Employee_Type_ID"
                   name="Employee_Type_ID"
                   class="form-select"
                 ></select>
-                <input id="addEmployeeType" class="form-control me-2" />
+                <input id="addEmployeeType" class="form-control" placeholder="Add new type" />
                 <button
                   type="button"
-                  class="delete-button"
+                  class="btn btn-outline-danger"
                   id="removeEmployeeTypeButton"
                 >
                   -
                 </button>
                 <button
                   type="button"
-                  class="add-button"
+                  class="btn btn-outline-primary"
                   id="addEmployeeTypeButton"
                 >
                   +
@@ -55,25 +55,25 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="employeeStatus">Employee Status</label>
+            <div class="mb-3">
+              <label for="employeeStatus" class="form-label">Employee Status</label>
               <div class="input-group">
                 <select
                   id="Employee_Status_ID"
                   name="Emp_Status_ID"
                   class="form-select"
                 ></select>
-                <input id="addEmployeeStatus" class="form-control me-2" />
+                <input id="addEmployeeStatus" class="form-control" placeholder="Add new status" />
                 <button
                   type="button"
-                  class="delete-button"
+                  class="btn btn-outline-danger"
                   id="removeEmployeeStatusButton"
                 >
                   -
                 </button>
                 <button
                   type="button"
-                  class="add-button"
+                  class="btn btn-outline-primary"
                   id="addEmployeeStatusButton"
                 >
                   +
@@ -81,72 +81,62 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="employeeFirstName">First Name</label>
-              <input type="text" id="employeeFirstName" name="Emp_FName" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="employeeFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="employeeFirstName" name="Emp_FName" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="employeeLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="employeeLastName" name="Emp_LName" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="employeeLname">Last Name</label>
-              <input type="text" id="employeeLastName" name="Emp_LName" />
+            <div class="mb-3">
+              <label for="employeeEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="employeeEmail" name="Emp_Email" />
             </div>
 
-            <div class="form-group">
-              <label for="employeeEmail">Email</label>
-              <input type="text" id="employeeEmail" name="Emp_Email" />
+            <div class="mb-3">
+              <label for="employeeCellPhone" class="form-label">Cell Phone</label>
+              <input type="tel" class="form-control" id="employeeCellPhone" name="Emp_Cell_Phone" />
             </div>
 
-            <div class="form-group">
-              <label for="employeeFname">Cell Phone</label>
-              <input type="tel" id="employeeCellPhone" name="Emp_Cell_Phone" />
+            <div class="mb-3">
+              <label for="employeeAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="employeeAddress" name="Emp_Address" />
             </div>
 
-            <div class="form-group">
-              <label for="employeeAddress">Address</label>
-              <input type="text" id="employeeAddress" name="Emp_Address" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="employeeCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="employeeCity" name="Emp_City" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="employeeZip" class="form-label">Zip Code</label>
+                <input type="text" class="form-control" id="employeeZip" name="Emp_Zip" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="employeeCity">City</label>
-              <input type="text" id="employeeCity" name="Emp_City" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="employeeCountry" class="form-label">Country</label>
+                <select id="Country_ID" name="Country_ID" class="form-select"></select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="employeeState" class="form-label">State</label>
+                <select id="State_ID" name="State_ID" class="form-select"></select>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="employeeZipcode">Zip Code</label>
-              <input type="text" id="employeeZip" name="Emp_Zip" />
+            <div class="mb-3">
+              <label for="dateAdded" class="form-label">Date Added</label>
+              <input type="date" id="dateAdded" name="Date_Added" class="form-control" />
             </div>
 
-            <div class="form-group">
-              <label for="employeeCountry">Country</label>
-              <select
-                id="Country_ID"
-                name="Country_ID"
-                class="form-select"
-              ></select>
-            </div>
-
-            <div class="form-group">
-              <label for="employeeState">State</label>
-              <select
-                id="State_ID"
-                name="State_ID"
-                class="form-select"
-              ></select>
-            </div>
-
-            <div class="form-group">
-              <label for="employeeDateAdded">Date Added</label>
-              <input
-                type="date"
-                id="dateAdded"
-                name="Date_Added"
-                class="form-control"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="employeeNotes">Employee Notes</label>
-              <textarea id="notes" name="notes" class="form-control"></textarea>
+            <div class="mb-3">
+              <label for="notes" class="form-label">Employee Notes</label>
+              <textarea id="notes" name="notes" class="form-control" rows="3"></textarea>
             </div>
           </form>
         </div>
