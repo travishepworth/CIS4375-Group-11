@@ -10,9 +10,14 @@
   margin-left: 220px; /* Margin to make space for the sidebar */
 }
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
+  margin-right: 15px;
+}
+.modal-dialog {
+  max-width: 900px; /* Adjust width as needed */
+  width: 100%;
 }
 label {
   display: block;
@@ -54,10 +59,12 @@ textarea {
   color: white;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
-  margin-left: 10px;
-  border-radius: 3px;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  font-size: 20px;
 }
+
 .add-button:hover {
   background-color: #0056b3;
 }
