@@ -79,3 +79,40 @@ textarea {
 .delete-button:hover {
   background-color: darkred;
 }
+.modal-header {
+  background-color: #343a40 !important;
+  color: #ffffff;
+  border-bottom: 1px solid #0c0b0b;
+}
+.btn-close {
+  filter: invert(1);
+  opacity: 1; /* Ensures full visibility */
+}
+/* Table styling */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 8px; /* Rounded corners */
+}
+
+.table thead th {
+  background-color: #495057; /* Darker shade for the header row */
+  color: #ffffff; /* White text for contrast */
+  font-weight: bold;
+  border-bottom: 2px solid #343a40; /* Adds separation from body */
+}
+
+.table tbody tr:hover {
+  background-color: #3c3f45; /* Lighter shade on hover */
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  padding: 12px 15px; /* Adds padding for a more spacious look */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #2f3136; /* Dark shade for odd rows */
+}
+

@@ -29,152 +29,94 @@
         </div>
         <div class="modal-body">
           <form id="employeeForm">
-            <div class="form-group">
-              <label for="supplierType">Supplier Type</label>
+            <div class="mb-3">
+              <label for="supplierType" class="form-label">Supplier Type</label>
               <div class="input-group">
-                <select
-                  id="Supplier_Type_ID"
-                  name="Supp_Type_ID"
-                  class="form-select"
-                ></select>
-                <input id="addSupplierType" class="form-control me-2" />
-                <button
-                  type="button"
-                  class="delete-button"
-                  id="removeSupplierTypeButton"
-                >
-                  -
-                </button>
-                <button
-                  type="button"
-                  class="add-button"
-                  id="addSupplierTypeButton"
-                >
-                  +
-                </button>
+                <select id="Supplier_Type_ID" name="Supp_Type_ID" class="form-select"></select>
+                <input id="addSupplierType" class="form-control" placeholder="Add new type" />
+                <button type="button" class="btn btn-outline-danger" id="removeSupplierTypeButton">-</button>
+                <button type="button" class="btn btn-outline-primary" id="addSupplierTypeButton">+</button>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierStatus">Supplier Status</label>
+            <div class="mb-3">
+              <label for="supplierStatus" class="form-label">Supplier Status</label>
               <div class="input-group">
-                <select
-                  id="Supplier_Status_ID"
-                  name="Supplier_Status_"
-                  class="form-select"
-                ></select>
-                <input id="addSupplierStatus" class="form-control me-2" />
-                <button
-                  type="button"
-                  class="delete-button"
-                  id="removeSupplierStatusButton"
-                >
-                  -
-                </button>
-                <button
-                  type="button"
-                  class="add-button"
-                  id="addSupplierStatusButton"
-                >
-                  +
-                </button>
+                <select id="Supplier_Status_ID" name="Supplier_Status_" class="form-select"></select>
+                <input id="addSupplierStatus" class="form-control" placeholder="Add new status" />
+                <button type="button" class="btn btn-outline-danger" id="removeSupplierStatusButton">-</button>
+                <button type="button" class="btn btn-outline-primary" id="addSupplierStatusButton">+</button>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierFname">First Name</label>
-              <input type="text" id="supplierFirstName" name="Supplier_FName" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="supplierFirstName" class="form-label">First Name</label>
+                <input type="text" id="supplierFirstName" name="Supplier_FName" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="supplierLastName" class="form-label">Last Name</label>
+                <input type="text" id="supplierLastName" name="Supplier_LName" class="form-control" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierLname">Last Name</label>
-              <input type="text" id="supplierLastName" name="Supplier_LName" />
+            <div class="mb-3">
+              <label for="supplierEmail" class="form-label">Email</label>
+              <input type="email" id="supplierEmail" name="Supplier_Email" class="form-control" />
             </div>
 
-            <div class="form-group">
-              <label for="supplierEmail">Email</label>
-              <input type="text" id="supplierEmail" name="Supplier_Email" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="supplierCellPhone" class="form-label">Cell Phone</label>
+                <input type="tel" id="supplierCellPhone" name="Supplier_Cell_Phone" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="supplierWorkPhone" class="form-label">Work Phone</label>
+                <input type="tel" id="supplierWorkPhone" name="Supplier_Work_Phone" class="form-control" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierCell">Cell Phone</label>
-              <input
-                type="text"
-                id="supplierCellPhone"
-                name="Supplier_Cell_Phone"
-              />
+            <div class="mb-3">
+              <label for="supplierAddress" class="form-label">Address</label>
+              <input type="text" id="supplierAddress" name="Supplier_Address" class="form-control" />
             </div>
 
-            <div class="form-group">
-              <label for="supplierWork">Work Phone</label>
-              <input
-                type="text"
-                id="supplierWorkPhone"
-                name="Supplier_Work_Phone"
-              />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="supplierCity" class="form-label">City</label>
+                <input type="text" id="supplierCity" name="Supplier_City" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="supplierZip" class="form-label">Zip Code</label>
+                <input type="text" id="supplierZip" name="Supplier_Zip" class="form-control" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierAddress">Address</label>
-              <input type="text" id="supplierAddress" name="Supplier_Address" />
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Country_ID" class="form-label">Country</label>
+                <select id="Country_ID" name="Country_ID" class="form-select"></select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="State_ID" class="form-label">State</label>
+                <select id="State_ID" name="State_ID" class="form-select"></select>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="supplierCity">City</label>
-              <input type="text" id="supplierCity" name="Supplier_City" />
+            <div class="mb-3">
+              <label for="dateAdded" class="form-label">Date Added</label>
+              <input type="date" id="dateAdded" name="Date_Added" class="form-control" />
             </div>
 
-            <div class="form-group">
-              <label for="supplierZipcode">Zip Code</label>
-              <input type="text" id="supplierZip" name="Supplier_Zip" />
-            </div>
-
-            <div class="form-group">
-              <label for="suppierCountry">Country</label>
-              <select
-                id="Country_ID"
-                name="Country_ID"
-                class="form-select"
-              ></select>
-            </div>
-
-            <div class="form-group">
-              <label for="supplierState">State</label>
-              <select
-                id="State_ID"
-                name="State_ID"
-                class="form-select"
-              ></select>
-            </div>
-
-            <div class="form-group">
-              <label for="supplierDateAdded">Date Added</label>
-              <input
-                type="date"
-                id="dateAdded"
-                name="Date_Added"
-                class="form-control"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="supplierNotes">Supplier Notes</label>
-              <textarea id="notes" name="Notes" class="form-control"></textarea>
+            <div class="mb-3">
+              <label for="notes" class="form-label">Supplier Notes</label>
+              <textarea id="notes" name="Notes" class="form-control" rows="4"></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            id="updateButton"
-            class="update-btn"
-            form="employeeForm"
-          >
-            Update
-          </button>
-          <button type="button" id="deleteButton" class="delete-btn">
-            Delete
-          </button>
+          <button type="button" id="updateButton" class="update-btn" form="employeeForm">Update</button>
+          <button type="button" id="deleteButton" class="delete-btn">Delete</button>
         </div>
       </div>
     </div>
