@@ -115,4 +115,9 @@ textarea {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #2f3136; /* Dark shade for odd rows */
 }
-
+.offcanvas-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: monospace;
+}
