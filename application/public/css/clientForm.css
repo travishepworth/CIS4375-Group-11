@@ -40,6 +40,7 @@ textarea {
   border: none;
   cursor: pointer;
   margin-right: 10px;
+  border-radius: 5px;
 }
 .update-btn {
   background-color: green;
@@ -47,6 +48,7 @@ textarea {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .delete-btn:hover {
   background-color: darkred;
@@ -55,7 +57,7 @@ textarea {
   background-color: darkgreen;
 }
 .add-button {
-  background-color: #007bff;
+  background-color: #133d6b;
   color: white;
   border: none;
   cursor: pointer;
@@ -120,4 +122,11 @@ textarea {
   left: 50%;
   transform: translateX(-50%);
   font-family: monospace;
+}
+body {
+  background-color: #D8DDDE;
+  background-image: url('/css/image/pngwing2.png'); /* Update the path to your image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: bottom right; /* Aligns the image to the bottom */
+  background-attachment: fixed;
 }
