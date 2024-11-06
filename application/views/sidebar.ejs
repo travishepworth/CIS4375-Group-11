@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,6 +25,51 @@
         height: 100%;
         margin: 0;
       }
+      .btn-menu {
+        width: 150px;
+        height: 50px;
+        border-radius: 5px;
+        border: none;
+        transition: all 0.5s ease-in-out;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        background: #212529;
+        color: #f5f5f5;
+      }
+      .btn-menu:hover {
+        box-shadow: 0 0 20px 0px #2e2e2e3a;
+      }
+      .btn-menu .icon {
+        position: absolute;
+        height: 40px;
+        width: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s;
+      }
+      .btn-menu .text {
+        transform: translateX(55px);
+      }
+      .btn-menu:hover .icon {
+        width: 175px;
+      }
+      .btn-menu:hover .text {
+        transition: all 0.5s;
+        opacity: 0;
+      }
+      .btn-menu:focus {
+        outline: none;
+      }
+      .btn-menu:active .icon {
+        transform: scale(0.85);
+      }
+      .nav-link.active {
+        background-color: #133d6b !important; /* Set the background color */
+        color: white !important; /* Set text color for contrast */
+      }
     </style>
   </head>
   
@@ -31,15 +77,22 @@
 <body>
   <!-- Toggle Button to open sidebar -->
   <button
-    class="btn btn-primary m-3"
-    type="button"
-    data-bs-toggle="offcanvas"
-    data-bs-target="#sidebar"
-    aria-controls="sidebar"
-    data-bs-backdrop="false"
-  >
-    ☰ Menu
-  </button>
+      class="btn-menu"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#sidebar"
+      aria-controls="sidebar"
+      data-bs-backdrop="false"
+    >
+      <span class="icon">
+          <svg viewBox="0 0 175 80" width="40" height="40">
+              <rect width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+              <rect y="30" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+              <rect y="60" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+          </svg>
+      </span>
+      <span class="text">MENU</span>
+    </button>
 
   <!-- Collapsible Sidebar -->
   <div
@@ -51,7 +104,7 @@
     data-bs-backdrop="false"
   >
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="sidebarLabel">Lynkstone</h5>
+      <h3 class="offcanvas-title" id="sidebarLabel">Lynkstone</h3>
       <button
         type="button"
         class="btn-close btn-close-white"
