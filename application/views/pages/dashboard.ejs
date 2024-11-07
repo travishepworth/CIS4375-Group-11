@@ -15,7 +15,10 @@
             New Meeting
           </button>
         </h2>
-        <p> Within 7 days</p>
+      <div class="btn-group mb-3">
+        <button id="withinSevenDays" class="btn btn-primary">Within 7 days</button>
+        <button id="allEvents" class="btn btn-primary">All Events</button>
+      </div>
         <%- include('../jobForm.ejs'); %>
         <%- include('../meetingForm.ejs'); %>
         <%- include('../search.ejs'); %>

@@ -1,13 +1,13 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
 const jobColumns = {
-  "Job_ID": "Type",
-  "Client_ID": "Client",
-  "Job_Date": "Date",
-  "Job_Time": "Time",
-  "Job_City": "City",
-  "Job_Address": "Address",
-  "Job_Profit": "Profit / Estimated Profit",
+  Job_ID: "Type",
+  Client_ID: "Client",
+  Job_Date: "Date",
+  Job_Time: "Time",
+  Job_City: "City",
+  Job_Address: "Address",
+  Job_Profit: "Profit / Estimated Profit",
 };
 
 const jobElementIDs = [
@@ -40,13 +40,13 @@ const jobModularIDs = [
 ];
 
 const meetingColumns = {
-  "Meeting_ID": "Type",
-  "Client_ID": "Client_ID",
-  "Meeting_Date": "Date",
-  "Meeting_Time": "Time",
-  "Meeting_City": "City",
-  "Meeting_Address": "Address",
-  "Quote": "Quote",
+  Meeting_ID: "Type",
+  Client_ID: "Client_ID",
+  Meeting_Date: "Date",
+  Meeting_Time: "Time",
+  Meeting_City: "City",
+  Meeting_Address: "Address",
+  Quote: "Quote",
 };
 
 const meetingElementIDs = [
@@ -76,8 +76,11 @@ const meetingModularIDs = [
   "State_ID_Meeting",
 ];
 
-const meetingEditableDropdowns = {"meetingStatus": "MJ_Status"};
-const jobEditableDropdowns = {"jobStatus": "MJ_Status", "jobDescription": "Job_Description"};
+const meetingEditableDropdowns = { meetingStatus: "MJ_Status" };
+const jobEditableDropdowns = {
+  jobStatus: "MJ_Status",
+  jobDescription: "Job_Description",
+};
 
 const meetingRoute = "/dashboard/meeting";
 const jobRoute = "/dashboard/job";
@@ -99,12 +102,43 @@ const JobPage = new TableFormWrapper(
   "jobFormModal",
 );
 
+let allEventsSelected = false;
+
 document.addEventListener("DOMContentLoaded", async () => {
+  document.getElementById("withinSevenDays").classList.add("active");
   await JobPage.constructTable();
   await MeetingPage.constructTable(false);
   MeetingPage.createDropdownListeners();
   JobPage.createDropdownListeners();
   JobPage.sortTableByDate();
+});
+
+document
+  .getElementById("withinSevenDays")
+  .addEventListener("click", async () => {
+    MeetingPage.refreshTable();
+    JobPage.refreshTable();
+    await JobPage.constructTable();
+    await MeetingPage.constructTable(false);
+    JobPage.sortTableByDate();
+    document.getElementById("withinSevenDays").classList.add("active");
+    document.getElementById("allEvents").classList.remove("active");
+    allEventsSelected = false;
+  });
+
+document.getElementById("allEvents").addEventListener("click", async () => {
+  allEventsSelected = true;
+  MeetingPage.refreshTable();
+  JobPage.refreshTable();
+  await JobPage.constructTable(true, allEventsSelected);
+  await MeetingPage.constructTable(false, allEventsSelected);
+  // MeetingPage.refreshTable();
+  // JobPage.refreshTable();
+  // await JobPage.search("");
+  // await MeetingPage.search("", false);
+  // JobPage.sortTableByDate();
+  document.getElementById("allEvents").classList.add("active");
+  document.getElementById("withinSevenDays").classList.remove("active");
 });
 
 document
@@ -115,9 +149,12 @@ document
     const search = document.getElementById("search").value;
     MeetingPage.refreshTable();
     JobPage.refreshTable();
-    await JobPage.search(search);
-    await MeetingPage.search(search, false);
-    JobPage.sortTableByDate();
+    console.log(allEventsSelected);
+    await JobPage.search(search, true, allEventsSelected);
+    await MeetingPage.search(search, false, allEventsSelected);
+    if (!allEventsSelected) {
+      JobPage.sortTableByDate();
+    }
   });
 
 document
@@ -145,9 +182,11 @@ document.querySelectorAll(".update-btn").forEach((button) => {
     JobPage.refreshTable();
     MeetingPage.updateRow();
     JobPage.updateRow();
-    await JobPage.redrawTable();
-    await MeetingPage.redrawTable(false);
-    JobPage.sortTableByDate();
+    await JobPage.redrawTable(true, allEventsSelected);
+    await MeetingPage.redrawTable(false, allEventsSelected);
+    if (!allEventsSelected) {
+      JobPage.sortTableByDate();
+    }
   });
 });
 
@@ -157,8 +196,10 @@ document.querySelectorAll(".delete-btn").forEach((button) => {
     JobPage.refreshTable();
     MeetingPage.deleteRow();
     JobPage.deleteRow();
-    await JobPage.redrawTable();
-    await MeetingPage.redrawTable(false);
-    JobPage.sortTableByDate();
+    await JobPage.redrawTable(true, allEventsSelected);
+    await MeetingPage.redrawTable(false, allEventsSelected);
+    if (!allEventsSelected) {
+      JobPage.sortTableByDate();
+    }
   });
 });

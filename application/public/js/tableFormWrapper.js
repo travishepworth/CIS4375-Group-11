@@ -49,7 +49,7 @@ export class TableFormWrapper {
     // return `${month}-${day}-${match[3]}`; !! Full return when year is working in the application
   }
   
-  async search(search, header = true) {
+  async search(search, header = true, allEvents = false) {
     const Timeregex = /^(0?[1-9]|1[0-2]):([0-5][0-9])\s?(AM|PM|am|pm)$/;
     const Dateregex = /^(0?[1-9]|1[0-2])-(0?[1-9]|1[0-9]|2[0-9]|3[01])$/;
     // const Dateregex = /^(0?[1-9]|1[0-2])-(0?[1-9]|1[0-9]|2[0-9]|3[01])-(\d{4})$/; !! Full dateregex when year is working in the application
@@ -60,8 +60,7 @@ export class TableFormWrapper {
       search = this.convertDateString(search,Dateregex)
     }
     this.searchTerm = search;
-    // this.#refreshTable();
-    await this.table.constructTable(this.searchTerm, header);
+    await this.table.constructTable(this.searchTerm, header, allEvents);
   }
 
   createDropdownListeners() {
@@ -94,7 +93,7 @@ export class TableFormWrapper {
     this.table.sortTableByDate();
   }
 
-  async constructTable(includeHeader = true) {
+  async constructTable(includeHeader = true, allEvents = false) {
     this.table = new Table(
       this.columns,
       this.route,
@@ -102,11 +101,11 @@ export class TableFormWrapper {
       this.modularIDs,
       this.form,
     );
-    await this.table.constructTable(this.searchTerm, includeHeader);
+    await this.table.constructTable(this.searchTerm, includeHeader, allEvents);
   }
 
-  async redrawTable(header = true) {
-    await this.table.constructTable(this.searchTerm, header);
+  async redrawTable(header = true, allEvents = false) {
+    await this.table.constructTable(this.searchTerm, header, allEvents);
   }
 
   // PRIVATE METHODS

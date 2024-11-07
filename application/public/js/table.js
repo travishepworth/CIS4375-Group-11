@@ -65,7 +65,7 @@ export class Table {
     }
   }
 
-  async constructBody(result) {
+  async constructBody(result, isEventTable) {
     const resultsTableBody = document.getElementById("results-table-body");
     const clientNames = await this.#lookupClientName();
     result.forEach(async (row) => {
@@ -79,7 +79,9 @@ export class Table {
         this.form.formName.includes("meeting") ||
         this.form.formName.includes("job")
       ) {
-        withinWeek = await this.#checkDate(row);
+        if (!isEventTable) {
+          withinWeek = await this.#checkDate(row);
+        }
         jobMeetingTable = true;
       }
 
@@ -100,6 +102,7 @@ export class Table {
         }
 
         // construct the table body based on different cases
+        // easier to elif chain than use a switch case
         if (key === "Job_ID" || key === "Meeting_ID") {
           // case to print Job or Meeting instead of ID
           const newCell = newRow.insertCell();
@@ -168,7 +171,7 @@ export class Table {
     rows.forEach((row) => table.appendChild(row));
   }
 
-  async constructTable(search = "", includeHeader = true) {
+  async constructTable(search = "", includeHeader = true, allEvents = false) {
     try {
       const response = await fetch(`${this.route}/search`, {
         method: "POST",
@@ -180,14 +183,15 @@ export class Table {
 
       // construct header for the table
       if (includeHeader) {
-        this.constructHeader();
+        this.constructHeader(true);
       }
 
       // get data from post request
       const result = await response.json();
 
       // construct body for the table
-      await this.constructBody(result);
+      this.constructBody(result, allEvents);
+
     } catch (error) {
       console.error("error: ", error);
     }
