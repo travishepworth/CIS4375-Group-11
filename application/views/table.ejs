@@ -2,25 +2,12 @@
 <html lang="en">
   <link href="css/clientForm.css" rel="stylesheet" />
   <body>
-    <form id="search-form" class="d-flex mb-4">
-      <input
-        id="search"
-        name="search"
-        for="search"
-        class="form-control me-2"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success" type="submit">
-        Search
-      </button>
-    </form>
-    <table class="table table-dark table-striped">
-      <thead id="results-table-header">
-      </thead>
-      <tbody id="results-table-body"></tbody>
-    </table>
+    <div style="overflow-x: auto; border-radius: 10px;">
+      <table class="table table-dark table-striped">
+        <thead id="results-table-header"></thead>
+        <tbody id="results-table-body"></tbody>
+      </table>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -1,10 +1,44 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <%- include('../header.ejs'); %> 
+  <%- include('../header.ejs'); %>
   <body>
-    <div class="d-flex" style="background-color: #212529;">
+    <style>
+      .form-control {
+        margin: 10px 0px;
+        border-radius: 5px;
+        padding: 5px 10px;
+      }
+      .form-label {
+        margin: 10px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: #133d6b;
+        color: white;
+      }
+    </style>
+    <div class="d-flex" style="background-color: #212529">
       <%- include('../sidebar.ejs'); %>
     </div>
-    </div>
+    <div class="flex-grow-1 p-3" style="margin-left: auto;">
+      <h2 class="mb-2">
+        Reports
+      </h2>
+      <select id="reportType" class="form-select" aria-label="Default select example">
+        <option value="leadsWithinTimeframe">Leads within a Timeframe</option>
+        <option value="leadsBecomingClients">Leads becoming clients within a Timeframe</option>
+        <option value="estimatedSales">Estimated Sales</option>
+        <option value="actualSales">Actual Sales</option>
+        <option value="percentageCompleteofJobs">Percentage Complete of Jobs</option>
+      </select>
+      <div class="d-flex">
+        <label for="startDate" class="form-label" style="margin-left: 0;">Start Date</label>
+        <input type="date" id="startDate" class="form-control" />
+        <label for="endDate" class="form-label" >End Date</label>
+        <input type="date" id="endDate" class="form-control" style="margin-right: 0;"/>
+      </div>
+      <button type="button" class="add-button" id="generateReport" style="margin-bottom: 10px;">Generate Report!</button>
+      <br>
+      <%- include('../table.ejs'); %>
+      <script type="module" src="js/reports.js"></script>
   </body>
 </html>

@@ -9,6 +9,43 @@ export class Table {
 
   // PUBLIC METHODS
 
+  async createReportTable(results) {
+    const resultsTableHeader = document.getElementById("results-table-header");
+    const resultsTableBody = document.getElementById("results-table-body");
+
+    // clear previous results
+    resultsTableHeader.innerHTML = "";
+    resultsTableBody.innerHTML = "";
+
+    for (const row in results.results) {
+      const workingObject = results.results[row];
+      const keysArray = Object.keys(workingObject);
+      const newRow = resultsTableBody.insertRow();
+      if (row === "0") {
+        const newHeader = resultsTableHeader.insertRow();
+        for (const key in keysArray) {
+          const newHeaderCell = newHeader.insertCell();
+          newHeaderCell.innerHTML = keysArray[key]
+            .replace(/_/g, " ")
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+        }
+      }
+      for (const key in keysArray) {
+        // format date on date added cell
+        if (keysArray[key].includes("Date")) {
+          workingObject[keysArray[key]] = new Date(
+            workingObject[keysArray[key]],
+          ).toLocaleDateString();
+        }
+        const newCell = newRow.insertCell();
+        // if to create the header if it is the first row
+        newCell.innerHTML = workingObject[keysArray[key]];
+      }
+    }
+  }
+
   async clearTable() {
     const resultsTableBody = document.getElementById("results-table-body");
     const resultsTableHeader = document.getElementById("results-table-header");
@@ -87,7 +124,10 @@ export class Table {
           const newCell = newRow.insertCell();
           const contents = this.#formatTime(row[key]);
           newCell.innerHTML = contents;
-        } else if ((key === "Quote" || key === "Job_Profit") && jobMeetingTable) {
+        } else if (
+          (key === "Quote" || key === "Job_Profit") &&
+          jobMeetingTable
+        ) {
           // case to display the estimated profit if the form is a job or meeting
           // job: previous deposit + charge - job cost
           // meeting: quote - cost
@@ -151,7 +191,7 @@ export class Table {
   }
 
   // PRIVATE METHODS
-  
+
   #formatTime(time) {
     const hours = parseInt(time.slice(0, 2));
     const minutes = time.slice(3, 5);
@@ -163,11 +203,11 @@ export class Table {
     } else {
       if (hours === 0) {
         return `12:${minutes} AM`;
-      };
+      }
       return `${hours}:${minutes} AM`;
     }
   }
-  
+
   #formatDate(date) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
