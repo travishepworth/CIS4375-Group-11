@@ -34,7 +34,10 @@ export class Table {
       }
       for (const key in keysArray) {
         // format date on date added cell
-        if (keysArray[key].includes("Date")) {
+        if (
+          keysArray[key].toLowerCase().includes("date") &&
+          workingObject[keysArray[key]] !== null
+        ) {
           workingObject[keysArray[key]] = new Date(
             workingObject[keysArray[key]],
           ).toLocaleDateString();
