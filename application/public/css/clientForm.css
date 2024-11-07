@@ -62,7 +62,6 @@ textarea {
   border: none;
   cursor: pointer;
   padding: 5px;
-  margin-left: 5px;
   border-radius: 5px;
   font-size: 20px;
 }
@@ -122,6 +121,9 @@ textarea {
   left: 50%;
   transform: translateX(-50%);
   font-family: monospace;
+  /* padding: 0px; */
+  display: inline-flex;
+  align-items: center;
 }
 body {
   background-color: #D8DDDE;
