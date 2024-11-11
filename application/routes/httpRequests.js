@@ -227,7 +227,6 @@ router.post("/:route/:type/lookupTable", async (req, res) => {
   query = `SELECT * FROM ${table}_${type}`;
   try {
     const results = await api.executeSingleQuery(query, connection);
-    console.log(results);
     res.json(results);
   } catch (err) {
     console.error("error: ", err);

@@ -149,7 +149,6 @@ document
     const search = document.getElementById("search").value;
     MeetingPage.refreshTable();
     JobPage.refreshTable();
-    console.log(allEventsSelected);
     await JobPage.search(search, true, allEventsSelected);
     await MeetingPage.search(search, false, allEventsSelected);
     if (!allEventsSelected) {
