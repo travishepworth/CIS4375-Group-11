@@ -102,6 +102,9 @@ export class Table {
         }
 
         // construct the table body based on different cases
+        let tableName =
+          this.form.formName.replace("FormModal", "").charAt(0).toUpperCase() +
+          this.form.formName.replace("FormModal", "").slice(1);
         const newCell = newRow.insertCell();
         switch (true) {
           case key === "Job_ID" || key === "Meeting_ID":
@@ -128,22 +131,8 @@ export class Table {
             newCell.innerHTML = this.#formatTime(row[key]);
             break;
 
-          case key.includes("Employee_Type_ID"):
-            const employeeTypes = await this.#lookupTable("Type", "Employee");
-            const employeeType = employeeTypes.find(
-              (type) => type.Employee_Type_ID === row[key],
-            );
-            newCell.innerHTML = employeeType.Employee_Type;
-            break;
-
-          case key.includes("Employee_Status_ID"):
-            const employeeStatuses = await this.#lookupTable("Status", "Employee");
-            const employeeStatus = employeeStatuses.find(
-              (status) => status.Emp_Status_ID === row[key],
-            );
-            newCell.innerHTML = employeeStatus.Employee_Status;
-            break;
-
+          // thanks for making the ID variables and the table names different so we need
+          // way more cases than necessary for substitutions
           case key.includes("Supp_Type_ID"):
             const supplierTypes = await this.#lookupTable("Type", "Supplier");
             const supplierType = supplierTypes.find(
@@ -153,19 +142,33 @@ export class Table {
             break;
 
           case key.includes("Supplier_Status_ID"):
-            const supplierStatuses = await this.#lookupTable("Status", "Supplier");
+            const supplierStatuses = await this.#lookupTable(
+              "Status",
+              "Supplier",
+            );
             const supplierStatus = supplierStatuses.find(
               (status) => status.Supplier_Status_ID === row[key],
             );
             newCell.innerHTML = supplierStatus.Supplier_Status;
             break;
 
-          case key.includes("Client_Type_ID"):
-            const clientTypes = await this.#lookupTable("Type", "Client");
-            const clientType = clientTypes.find(
-              (type) => type.Client_Type_ID === row[key],
+          case key.includes("Type_ID"):
+            const lookupTypes = await this.#lookupTable("Type", tableName);
+            const lookupType = lookupTypes.find(
+              (type) => type[tableName + "_Type_ID"] === row[key],
             );
-            newCell.innerHTML = clientType.Client_Type;
+            newCell.innerHTML = lookupType[tableName + "_Type"];
+            break;
+
+          case key.includes("Employee_Status_ID"):
+            const employeeStatuses = await this.#lookupTable(
+              "Status",
+              "Employee",
+            );
+            const employeeStatus = employeeStatuses.find(
+              (status) => status.Emp_Status_ID === row[key],
+            );
+            newCell.innerHTML = employeeStatus.Employee_Status;
             break;
 
           case key.includes("Client_Status_ID"):
@@ -190,7 +193,6 @@ export class Table {
             break;
 
           default:
-            console.log("row[key]: ", row);
             newCell.innerHTML = row[key];
             break;
         }
