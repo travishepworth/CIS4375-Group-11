@@ -143,8 +143,7 @@ router.post("/:route/generate/:type", (req, res) => {
               Job.Job_Time AS Time,
               Job.Job_Address AS Address,
               Job_Description.Job_Description AS Job_Description,
-              MJ_Status.MJ_Status AS Job_Status,
-              Job.MJ_Status_ID
+              MJ_Status.MJ_Status AS Job_Status
           FROM Job
           JOIN Client ON Job.Client_ID = Client.Client_ID
           JOIN MJ_Status ON Job.MJ_Status_ID = MJ_Status.MJ_Status_ID
@@ -169,17 +168,64 @@ router.post("/:route/generate/:type", (req, res) => {
                   'Percentage Completed: ', 
                   ROUND((SUM(CASE WHEN Job.MJ_Status_ID = 2 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2), 
                   '%'
-              ) AS Job_Status,
-              NULL AS MJ_Status_ID
+              ) AS Job_Status
           FROM Job
           WHERE Job.Job_Date BETWEEN '${startDate}' AND '${endDate}'
       )
 
-      -- Final ORDER BY for sorting by MJ_Status_ID and date/time
+      -- Wrap the UNION query in a subquery to perform the ORDER BY
       ORDER BY 
-          CASE WHEN MJ_STATUS_ID IS NULL THEN 1 ELSE 0 END,
-          FIELD(MJ_Status_ID, 2, 16, 15), -- Sort by MJ_Status_ID order (2 = Completed, 16 = In-Progress, 15 = Upcoming)
-          Date, Time;`,
+          CASE WHEN FIELD(Job_Status, 'Completed', 'In-Progress', 'Upcoming') > 0 THEN 0 ELSE 1 END,
+          FIELD(Job_Status, 'Completed', 'In-Progress', 'Upcoming'), -- Sort by job status order
+          Date, Time;`
+    // `
+    //   -- Main Query: Job listing with client information, job description, and job status
+    //   (
+    //       SELECT 
+    //           Client.Client_FName AS First_Name,
+    //           Client.Client_LName AS Last_Name,
+    //           Client.Client_Cell_Phone AS Phone_Number,
+    //           Job.Job_Date AS Date,
+    //           Job.Job_Time AS Time,
+    //           Job.Job_Address AS Address,
+    //           Job_Description.Job_Description AS Job_Description,
+    //           MJ_Status.MJ_Status AS Job_Status,
+    //           Job.MJ_Status_ID
+    //       FROM Job
+    //       JOIN Client ON Job.Client_ID = Client.Client_ID
+    //       JOIN MJ_Status ON Job.MJ_Status_ID = MJ_Status.MJ_Status_ID
+    //       JOIN Job_Description ON Job.Job_Description_ID = Job_Description.Job_Description_ID
+    //       WHERE Job.Job_Date BETWEEN '${startDate}' AND '${endDate}'
+    //   )
+    //
+    //   -- UNION to add percentage completed at the bottom
+    //   UNION ALL
+    //
+    //   -- Percentage of completed jobs
+    //   (
+    //       SELECT 
+    //           NULL AS First_Name,
+    //           NULL AS Last_Name,
+    //           NULL AS Phone_Number,
+    //           NULL AS Date,
+    //           NULL AS Time,
+    //           NULL AS Address,
+    //           NULL AS Job_Description,
+    //           CONCAT(
+    //               'Percentage Completed: ', 
+    //               ROUND((SUM(CASE WHEN Job.MJ_Status_ID = 2 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2), 
+    //               '%'
+    //           ) AS Job_Status,
+    //           NULL AS MJ_Status_ID
+    //       FROM Job
+    //       WHERE Job.Job_Date BETWEEN '${startDate}' AND '${endDate}'
+    //   )
+    //
+    //   -- Final ORDER BY for sorting by MJ_Status_ID and date/time
+    //   ORDER BY 
+    //       CASE WHEN MJ_STATUS_ID IS NULL THEN 1 ELSE 0 END,
+    //       FIELD(MJ_Status_ID, 2, 16, 15), -- Sort by MJ_Status_ID order (2 = Completed, 16 = In-Progress, 15 = Upcoming)
+    //       Date, Time;`,
   };
 
   const query = queries[type];
