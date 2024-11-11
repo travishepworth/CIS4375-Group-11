@@ -1,12 +1,13 @@
 import { TableFormWrapper } from "./tableFormWrapper.js";
 
 const columns = {
-  "Supplier_ID": "ID",
   "Supplier_FName": "First Name",
   "Supplier_LName": "Last Name",
   "Supplier_Email": "Email",
   "Supplier_Address": "Address",
   "Supplier_Cell_Phone": "Cell Phone",
+  "Supplier_Status_ID": "Status",
+  "Supp_Type_ID": "Type",
 };
 
 const elementIDs = [

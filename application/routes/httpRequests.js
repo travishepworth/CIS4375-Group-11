@@ -221,10 +221,23 @@ router.post("/:route/:type/update/delete", async (req, res) => {
   }
 });
 
+router.post("/:route/:type/lookupTable", async (req, res) => {
+  const table = req.params.type;
+  const type = req.body.type;
+  query = `SELECT * FROM ${table}_${type}`;
+  try {
+    const results = await api.executeSingleQuery(query, connection);
+    console.log(results);
+    res.json(results);
+  } catch (err) {
+    console.error("error: ", err);
+  }
+});
+
 router.post("/:route/clientID", async (req, res) => {
   query = `SELECT Client_FName, Client_LName, Client_ID FROM Client`;
   try {
-    const results = await api.returnAllClients(query, connection);
+    const results = await api.executeSingleQuery(query, connection);
     res.json(results);
   } catch (err) {
     console.error("error: ", err);

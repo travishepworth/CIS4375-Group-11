@@ -19,7 +19,7 @@ async function tableQuery(query, connection, req) {
   }
 };
 
-async function returnAllClients(query, connection) {
+async function executeSingleQuery(query, connection) {
   try {
     const [results] = await connection
       .promise()
@@ -55,4 +55,4 @@ async function databaseUpdate(query, connection, req) {
   }
 };
 
-export { tableQuery, databaseUpdate, idSearch, returnAllClients };
+export { tableQuery, databaseUpdate, idSearch, executeSingleQuery };

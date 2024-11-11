@@ -16,10 +16,6 @@ const myMiddleware = (req, res, next) => {
 
 router.use(hasAuth);
 
-const query = `SELECT * FROM Supplier WHERE Supplier_FName LIKE ? 
-    OR Supplier_LName LIKE ? 
-    OR Supplier_Email LIKE ?
-    OR Supplier_Cell_Phone LIKE ?`;
 
 router.get("/", (req, res) => {
   res.render("pages/suppliers", { currentRoute: "suppliers" });

@@ -102,57 +102,97 @@ export class Table {
         }
 
         // construct the table body based on different cases
-        // easier to elif chain than use a switch case
-        if (key === "Job_ID" || key === "Meeting_ID") {
-          // case to print Job or Meeting instead of ID
-          const newCell = newRow.insertCell();
-          newCell.innerHTML =
-            this.form.formName
-              .replace("FormModal", "")
-              .charAt(0)
-              .toUpperCase() +
-            this.form.formName.replace("FormModal", "").slice(1);
-        } else if (key === "Client_ID" && jobMeetingTable) {
-          // Case to print client name instead of ID
-          const newCell = newRow.insertCell();
-          const clientName = clientNames.find(
-            (client) => client.Client_ID === row[key],
-          );
-          newCell.innerHTML = `${clientName.Client_FName} ${clientName.Client_LName}`;
-        } else if (key.includes("Date")) {
-          // case to format date
-          const newCell = newRow.insertCell();
-          const contents = this.#formatDate(new Date(row[key]));
-          // newCell.innerHTML = new Date(row[key]).toLocaleDateString();
-          newCell.innerHTML = contents;
-        } else if (key.includes("Time")) {
-          // case to format time for AM/PM
-          const newCell = newRow.insertCell();
-          const contents = this.#formatTime(row[key]);
-          newCell.innerHTML = contents;
-        } else if (
-          (key === "Quote" || key === "Job_Profit") &&
-          jobMeetingTable
-        ) {
-          // case to display the estimated profit if the form is a job or meeting
-          // job: previous deposit + charge - job cost
-          // meeting: quote - cost
-          if (this.form.formName.includes("meeting")) {
-            const quote = row[key];
-            const charge = row["Est_Cost"];
-            const newCell = newRow.insertCell();
-            newCell.innerHTML = quote - charge;
-          } else if (this.form.formName.includes("job")) {
-            const charge = row["Charge"];
-            const jobCost = row["Job_Cost"];
-            const deposit = row["Prev_Deposit"];
-            const newCell = newRow.insertCell();
-            newCell.innerHTML = deposit + charge - jobCost;
-          }
-        } else {
-          // default case
-          const newCell = newRow.insertCell();
-          newCell.innerHTML = row[key];
+        const newCell = newRow.insertCell();
+        switch (true) {
+          case key === "Job_ID" || key === "Meeting_ID":
+            newCell.innerHTML =
+              this.form.formName
+                .replace("FormModal", "")
+                .charAt(0)
+                .toUpperCase() +
+              this.form.formName.replace("FormModal", "").slice(1);
+            break;
+
+          case key === "Client_ID" && jobMeetingTable:
+            const clientName = clientNames.find(
+              (client) => client.Client_ID === row[key],
+            );
+            newCell.innerHTML = `${clientName.Client_FName} ${clientName.Client_LName}`;
+            break;
+
+          case key.includes("Date"):
+            newCell.innerHTML = this.#formatDate(new Date(row[key]));
+            break;
+
+          case key.includes("Time"):
+            newCell.innerHTML = this.#formatTime(row[key]);
+            break;
+
+          case key.includes("Employee_Type_ID"):
+            const employeeTypes = await this.#lookupTable("Type", "Employee");
+            const employeeType = employeeTypes.find(
+              (type) => type.Employee_Type_ID === row[key],
+            );
+            newCell.innerHTML = employeeType.Employee_Type;
+            break;
+
+          case key.includes("Employee_Status_ID"):
+            const employeeStatuses = await this.#lookupTable("Status", "Employee");
+            const employeeStatus = employeeStatuses.find(
+              (status) => status.Emp_Status_ID === row[key],
+            );
+            newCell.innerHTML = employeeStatus.Employee_Status;
+            break;
+
+          case key.includes("Supp_Type_ID"):
+            const supplierTypes = await this.#lookupTable("Type", "Supplier");
+            const supplierType = supplierTypes.find(
+              (type) => type.Supp_Type_ID === row[key],
+            );
+            newCell.innerHTML = supplierType.Supplier_Type;
+            break;
+
+          case key.includes("Supplier_Status_ID"):
+            const supplierStatuses = await this.#lookupTable("Status", "Supplier");
+            const supplierStatus = supplierStatuses.find(
+              (status) => status.Supplier_Status_ID === row[key],
+            );
+            newCell.innerHTML = supplierStatus.Supplier_Status;
+            break;
+
+          case key.includes("Client_Type_ID"):
+            const clientTypes = await this.#lookupTable("Type", "Client");
+            const clientType = clientTypes.find(
+              (type) => type.Client_Type_ID === row[key],
+            );
+            newCell.innerHTML = clientType.Client_Type;
+            break;
+
+          case key.includes("Client_Status_ID"):
+            const clientStatuses = await this.#lookupTable("Status", "Client");
+            const clientStatus = clientStatuses.find(
+              (status) => status.Client_Status_ID === row[key],
+            );
+            newCell.innerHTML = clientStatus.Client_Status;
+            break;
+
+          case (key === "Quote" || key === "Job_Profit") && jobMeetingTable:
+            if (this.form.formName.includes("meeting")) {
+              const quote = row[key];
+              const charge = row["Est_Cost"];
+              newCell.innerHTML = quote - charge;
+            } else if (this.form.formName.includes("job")) {
+              const charge = row["Charge"];
+              const jobCost = row["Job_Cost"];
+              const deposit = row["Prev_Deposit"];
+              newCell.innerHTML = deposit + charge - jobCost;
+            }
+            break;
+
+          default:
+            console.log("row[key]: ", row);
+            newCell.innerHTML = row[key];
+            break;
         }
       }
     });
@@ -191,7 +231,6 @@ export class Table {
 
       // construct body for the table
       this.constructBody(result, allEvents);
-
     } catch (error) {
       console.error("error: ", error);
     }
@@ -220,6 +259,23 @@ export class Table {
     const day = date.getDate();
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
+  }
+
+  async #lookupTable(type, route) {
+    try {
+      const response = await fetch(`/dashboard/${route}/lookupTable`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ type: type }),
+      });
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("error: ", error);
+    }
   }
 
   async #lookupClientName() {
