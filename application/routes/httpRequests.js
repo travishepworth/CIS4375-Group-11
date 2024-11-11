@@ -254,11 +254,21 @@ router.post("/:route/:type/search", async (req, res) => {
   let query = `SELECT * FROM ${queryType} WHERE ${subType}_ID LIKE ?`;
 
   // Add fields for job and meeting specific searching
+  // ignore the query spaghetti
   if (type === "job" || type === "meeting") {
+    query = `
+      SELECT ${queryType}.*, Client.Client_FName, Client.Client_LName 
+      FROM ${queryType} 
+      LEFT JOIN Client ON ${queryType}.Client_ID = Client.Client_ID
+      WHERE ${subType}_ID LIKE ?
+      `;
     query += ` OR ${subType}_Date LIKE ?`;
     query += ` OR ${subType}_Time LIKE ?`;
     query += ` OR ${subType}_City LIKE ?`;
     query += ` OR ${subType}_Address LIKE ?`;
+    // also search by client fname and lname from the Client table
+    query += ` OR Client.Client_FName LIKE ?`;
+    query += ` OR Client.Client_LName LIKE ?`;
   }
   // Add fields for client/employee/suppliers specific searching
   if (type === "client" || type === "employee" || type === "supplier") {
